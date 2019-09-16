@@ -1,2 +1,2 @@
 # donation-aggregator
-A web based platform for charitable organizations to advertise their causes to donors
+The goal of this project is to develop a marketplace to connect donors to charitable organisations. Such a marketplace would allow charitable organisations to advertise their mission, and users to find a charity based on causes they support. This platform would also allow charities to advertise their events of social service, and users to register and participate. It will also include a service to automatically flag emergency events and allow charities to start emergency relief campaigns for the same.
