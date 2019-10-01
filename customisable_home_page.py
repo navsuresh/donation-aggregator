@@ -68,7 +68,7 @@ class updateSlot_CharityPage(Resource):
             return "The slot_id %s should be between 1 and %s (inclusive)"%(slot_id,slot_count),400
 
         if(widget_id>widget_count or widget_id<1 or str(widget_id).isdigit()==False): # invalid widget_id
-            return "The slot_id %s should be between 1 and %s (inclusive)"%(widget_id,widget_count),400
+            return "The widget_id %s should be between 1 and %s (inclusive)"%(widget_id,widget_count),400
 
         slots = collection.find_one({"cid": cid})["slots"]
         slots[int(slot_id)-1] = str(widget_id) # -1 for 0 indexing
