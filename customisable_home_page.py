@@ -61,13 +61,13 @@ class updateSlot_CharityPage(Resource):
         slot_id = req["slot_id"]
         widget_id = req["widget_id"]
 
-        slot_count = collection.find_one({"doc_type": "common"})["slots_count"] # doc_type common used for getting common data for the collection
-        widget_count = collection.find_one({"doc_type": "common"})["widget_count"] # doc_type common used for getting common data for the collection
+        slot_count = int(collection.find_one({"doc_type": "common"})["slots_count"]) # doc_type common used for getting common data for the collection
+        widget_count = int(collection.find_one({"doc_type": "common"})["widget_count"]) # doc_type common used for getting common data for the collection
         
-        if(slot_id>slot_count or slot_id<1 or str(slot_id).isdigit()==False): # invalid slot_id
+        if(str(slot_id).isdigit()==False or int(slot_id)>slot_count or int(slot_id)<1): # invalid slot_id
             return "The slot_id %s should be between 1 and %s (inclusive)"%(slot_id,slot_count),400
 
-        if(widget_id>widget_count or widget_id<1 or str(widget_id).isdigit()==False): # invalid widget_id
+        if(str(widget_id).isdigit()==False or int(widget_id)>widget_count or int(widget_id)<1): # invalid widget_id
             return "The widget_id %s should be between 1 and %s (inclusive)"%(widget_id,widget_count),400
 
         slots = collection.find_one({"cid": cid})["slots"]
