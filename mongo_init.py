@@ -21,5 +21,7 @@ events.insert(event)
 charities = db["charities"]
 
 # for users
-users = db["users"]
+
+# for widgets
+
 
