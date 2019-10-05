@@ -1,0 +1,199 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Lato:900|Montserrat|Roboto&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/static/corecss.css">
+    </head>
+    <body>
+        <div class="slideshow">
+            <img src="/static/wallpaper1.jpg" id="slide-image-0">
+            <img src="/static/wallpaper2.jpg" id="slide-image-1">
+            <img src="/static/wallpaper3.jpg" id="slide-image-2">
+        </div>
+        <div class="white-overlay">
+
+        </div>
+
+        <div class="right-container">
+            <div id="sign-up-for-users">
+                <div class="container-header">
+                    <h2> Sign Up </h2>
+                    <!--<input value="Click for user login" type="button" id="user-select" onclick="selectUser(this.id)"><input value="Click for charity login"  type="button" id="charity-select" onclick="selectUser(this.id)">-->
+                </div>
+                <div class="container-body">
+                        <div id="details-body">
+                            <p>Username</p>
+                            <input type="text" class="signup-input" id="charity-name">
+                            <div class="box-inputs">
+                                <p>Password</p>
+                                <p>Confirm Password</p>
+                            </div>
+                            <div class="box-inputs">
+                                <input class="signup-input" type="password" id="user-password">
+                                <input class="signup-input" type="password" id="confirm-user-password" onkeyup="comparePasswords()">
+                            </div>
+                            <p id="comparison-status"></p>
+                            <p>Email</p>
+                            <input type="email" class="signup-input" id="email-id" required>
+                            <div class="box-inputs">
+                                <p>Handle</p>
+                                <p>Phone Number</p>
+                            </div>
+                            <div class="box-inputs">
+                                <input class="signup-input" id="handle">
+                                <input class="signup-input" id="ph-num">
+                            </div>
+                            <p>Select role</p>
+                            <div class="custom-radio">
+                                <div class="radio-button">
+                                    <p>User</p>
+                                    <div class="choose-role" id="user-role" onclick="selectRole(this.id)"><div class="inner-circle"></div></div>
+                                </div>
+                                <div class="radio-button">
+                                    <p>Charity</p>
+                                    <div class="choose-role" id="charity-role" onclick="selectRole(this.id)"><div class="inner-circle"></div></div>
+                                </div>
+                            </div>
+                            <div class="container-footer">
+                                <input type="submit" class="login-btn" onclick="signUpMail()" value="Sign up">
+                                <br>
+                                <a href="login" id="sign-up-a">Already have an account? Click here to login!</a>
+                            </div>  
+                        </div>
+                        <div id="otp-verify">
+                            <p>Enter OTP</p>
+                            <div id="otp-box">
+                                <input maxlength="1" class="otp-input" id="otp1">
+                                <input maxlength="1" class="otp-input" id="otp2">
+                                <input maxlength="1" class="otp-input" id="otp3">
+                                <input maxlength="1" class="otp-input" id="otp4">
+                                <input maxlength="1" class="otp-input" id="otp5">
+                                <input maxlength="1" class="otp-input" id="otp6">
+                            </div>
+                            <br><br>
+                            <input onclick="signUpMail()" type="button" id="resend-btn" value="Resend OTP">
+                            <p id="countdown-timer"></p>
+                            <p id="otp-notif">Check your email ID for the OTP</p>
+                        <div class="container-footer">
+                            <input type="submit" class="login-btn" onclick="verifyToken()" value="Submit OTP">
+                        </div> 
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+            
+        <script>
+            var currentWallpaper = 0
+            var nextWallpaper
+            var currentEmail;
+            var role;
+            function setBackground(){
+                nextWallpaper = (currentWallpaper+1)%3
+                console.log(currentWallpaper,nextWallpaper)
+                $("#slide-image-"+nextWallpaper).css({"z-index":"2"}).fadeIn(2500,function(){
+                    $("#slide-image-"+nextWallpaper).css({"z-index":"1"})
+                    $("#slide-image-"+currentWallpaper).css({"z-index":"0"}).hide()
+                    currentWallpaper = nextWallpaper
+                })
+                
+                
+                
+            }
+            setInterval(setBackground,8000)
+
+            function selectRole(id){
+                $("#user-role").css({"background":"#fff"})
+                $("#charity-role").css({"background":"#fff"})
+                $("#"+id).css({"background":"#5cb85c"})
+                role = id.split("-")[0]
+            }
+
+            function signUpMail(){
+                currentEmail = $("#email-id").val()
+                $("#details-body").fadeOut("slow",function(){
+                    $("#otp-verify").fadeIn("fast")
+                })
+                startTimer(120);
+                $.ajax({
+                    url:"/sendMail",
+                    method:"POST",
+                    data:JSON.stringify({"email":currentEmail,"username":$("#charity-name").val(),"password":$("#user-password").val(),"handle":$("#handle").val(),"phNo":$("#ph-num").val(),"role":role}),
+                    contentType: "application/json; charset=utf-8",
+                    success:function(data){
+                        console.log("Send")
+                    }
+                })
+
+            }
+
+            var startTime, countAmt, interval;
+
+            function now() {
+            return ((new Date()).getTime());
+            }
+
+            function tick() {
+                var elapsed = now() - startTime;
+                var cnt = Math.floor((countAmt - elapsed)/1000);
+                if(cnt<=0){
+                    clearInterval(interval);
+                    $(".otp-input").attr('readonly', true);
+                }
+                var minutes = Math.floor(cnt/60);
+                var seconds = Math.floor(cnt%60);
+                document.getElementById("countdown-timer").innerHTML = "Time : "
+                + minutes + "m " + seconds + "s ";
+                
+            }
+
+            function startTimer(secs) {
+                clearInterval(interval);
+                var minutes = Math.floor(secs/60);
+                var seconds = Math.floor(secs%60);
+                document.getElementById("countdown-timer").innerHTML = "Time : "
+                + minutes + "m " + seconds + "s ";
+                countAmt = secs * 1000;
+                startTime = now();
+                interval = setInterval(tick, 1000);  
+            }
+
+            function verifyToken(){
+                var otp = $("#otp1").val()+$("#otp2").val()+$("#otp3").val()+$("#otp4").val()+$("#otp5").val()+$("#otp6").val()
+                $.ajax({
+                    url:"/verifyotp",
+                    method:"POST",
+                    data:JSON.stringify({"email":currentEmail,"otp":otp}),
+                    contentType: "application/json; charset=utf-8",
+                    success:function(data){
+                        if(data==1){
+                            alert("Account created")
+                        }
+                        else{
+                            alert("Wrong OTP")
+                            $(".otp-input").val("")
+                        }
+                    }
+                })
+            }
+        
+            function comparePasswords()
+            {
+                if($("#user-password").val()==""){
+                    return
+                }
+                $("#comparison-status").css({"opacity":"1"})
+                if($("#user-password").val()==$("#confirm-user-password").val()){
+                    $("#comparison-status").text("Passwords match").css({"color":"#5cb85c"})
+                }
+                else{
+                    $("#comparison-status").text("Passwords do not match").css({"color":"#d9534f"})
+                }
+            }
+
+            $(document).ready( function() {
+                $("input[type='text'], textarea").attr('spellcheck',false);
+            });
+        </script>
+    </body>
+</html>
