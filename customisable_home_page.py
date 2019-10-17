@@ -50,11 +50,11 @@ class calendarWidget(Resource):
         try:
             c = calendar_collection.find_one({"cid": cid}); # format - {cid:id,caldata[data_to_be_returned]}
             req = eval(request.data) # expecting json format (Ex - '{caldata:[data_to_be_added]}')
-            if(c==None): 
+            if(c==None): # cid not present in DB, added new entry (Assuming logged in through sessions maintaining security)
                 post = {"cid":cid, "caldata":[str(i) for i in req]}
                 calendar_collection.insert_one(post)
                 return "Success"
-            else:
+            else: # when the cid is present in the db
                 updated = c["caldata"]
                 updated.extend([str(i) for i in req]) # adding new data to prev data
                 print(updated)
