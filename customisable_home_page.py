@@ -33,11 +33,11 @@ class calendarWidget(Resource):
         if(session["logged_in_as"]=="charity" and session["cid"]!=cid): # not logged in as a charity
             return "The cid does not match logged_in id.",400
         '''
-        c = calendar_collection.find_one({"cid": cid}); # format - {cid:id,caldata:{data_to_be_returned}}
+        c = calendar_collection.find_one({"cid": cid}); # format - {cid:id,caldata:[data_to_be_returned]}
         if(c==None): # check calendar events for requested cid
             return {},204
-        else: # returning requested JSON
-            return [eval(i) for i in c["caldata"]],200 # returns with format - [{"somedate": "content","type": "reminder"},{"somedate": "content","type": "reminder"}]
+        else: # returning requested list
+            return [eval(i) for i in c["caldata"]],200 # returns with format - [{"somedate": "content","type": "reminder"},{"somedate": "content","type": "reminder"}]    
 
     def post(self,cid): # when updating calender events
         # un-comment when session is implemented
@@ -48,7 +48,23 @@ class calendarWidget(Resource):
         if(session["logged_in_as"]=="charity" and session["cid"]!=cid): # not logged in as a charity
             return "The cid does not match logged_in id.",400
         '''
-        return {},204
+        try:
+            c = calendar_collection.find_one({"cid": cid}); # format - {cid:id,caldata[data_to_be_returned]}
+            req = eval(request.data) # expecting json format (Ex - '{caldata:[data_to_be_added]}')
+            if(c==None): 
+                post = {"cid":cid, "caldata":[str(i) for i in req]}
+                calendar_collection.insert_one(post)
+                return "Success"
+            else:
+                updated = c["caldata"]
+                updated.extend([str(i) for i in req]) # adding new data to prev data
+                print(updated)
+                myquery = { "cid": cid } # updating this cid
+                newvalues = { "$set": { "caldata": updated} } # adding updated data
+                calendar_collection.update_one(myquery, newvalues) # updating the collection
+                return "Success"
+        except:
+            return "Failed",400
 api.add_resource(calendarWidget, '/charity/<cid>/calendar')
 
 # ------------------------------------------------------
