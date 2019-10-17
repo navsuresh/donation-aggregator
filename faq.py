@@ -148,6 +148,7 @@ class modifyFAQ(Resource):
                     return "There is no reply ID %s for FAQ ID %s,event ID %s and charity ID %s in DB"%(rid, fid, eid, cid), 404
             else:
                 faqs.update_one({"CharityID": cid, "EventID": eid, "FaqID":fid}, {'$set':{"QueryString" : new_reply}})
+                return "Updated", 200
     def delete(self):
         '''
         Expected json format: 
