@@ -119,6 +119,7 @@ class modifyFAQ(Resource):
             "ReplyID": 4,
             "UserID" : 23
         }
+        if replyID == -1, replyString will contain replacement value for QueryString
         '''
         req = eval(request.data)
         cid = req["CharityID"]
@@ -133,18 +134,20 @@ class modifyFAQ(Resource):
             return "There is no FAQ ID %s and event ID %s for charity ID %s in DB"%(fid, eid, cid), 404
 
         else:
-            modified_reply = faq["Replies"]
-            flag = 0
-            for i in range(len(modified_reply)):
-                if(modified_reply[i]["ReplyID"] == rid):
-                    modified_reply[i]["ReplyString"] = new_reply
-                    flag = 1
-            if(flag):
-                faqs.update_one({"CharityID": cid, "EventID": eid, "FaqID":fid}, {'$set': {"Replies" : modified_reply}})        
-                return "Reply modified", 200
+            if(rid != -1):
+                modified_reply = faq["Replies"]
+                flag = 0
+                for i in range(len(modified_reply)):
+                    if(modified_reply[i]["ReplyID"] == rid):
+                        modified_reply[i]["ReplyString"] = new_reply
+                        flag = 1
+                if(flag):
+                    faqs.update_one({"CharityID": cid, "EventID": eid, "FaqID":fid}, {'$set': {"Replies" : modified_reply}})        
+                    return "Reply modified", 200
+                else:
+                    return "There is no reply ID %s for FAQ ID %s,event ID %s and charity ID %s in DB"%(rid, fid, eid, cid), 404
             else:
-                return "There is no reply ID %s for FAQ ID %s,event ID %s and charity ID %s in DB"%(rid, fid, eid, cid), 404
-
+                faqs.update_one({"CharityID": cid, "EventID": eid, "FaqID":fid}, {'$set':{"QueryString" : new_reply}})
     def delete(self):
         '''
         Expected json format: 
