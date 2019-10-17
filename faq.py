@@ -88,7 +88,6 @@ class replyFAQ(Resource):
         is_answer = 0
         if(any(d["UserID"] == uid for d in event['Coordinators'])):
             is_answer = 1
-        print("faq[Replies] IS: ", faq["Replies"])
         # Check if any replies exist for this event. If yes, get max value of ++ReplyID as new ReplyID
         if(len(faq["Replies"]) == 0):
             new_reply_id = 0
