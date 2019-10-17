@@ -16,6 +16,40 @@ api = Api(app)
 client = MongoClient('localhost', 27017)
 db = client['SE']
 collection = db['charity_page']
+calendar_collection = db['charity_calendar_widget'] 
+
+
+# ------------------------------------------------------
+
+# NEEDS TO DO ERROR HANDLING
+# handles calendar widget requests
+class calendarWidget(Resource):
+    def get(self,cid): # when requesting calendar requests
+        # un-comment when session is implemented
+        '''
+        if(session["logged_in"]==False): # not logged in
+            return "Not logged in.",400
+
+        if(session["logged_in_as"]=="charity" and session["cid"]!=cid): # not logged in as a charity
+            return "The cid does not match logged_in id.",400
+        '''
+        c = calendar_collection.find_one({"cid": cid}); # format - {cid:id,caldata:{data_to_be_returned}}
+        if(c==None): # check calendar events for requested cid
+            return {},204
+        else: # returning requested JSON
+            return [eval(i) for i in c["caldata"]],200 # returns with format - [{"somedate": "content","type": "reminder"},{"somedate": "content","type": "reminder"}]
+
+    def post(self,cid): # when updating calender events
+        # un-comment when session is implemented
+        '''
+        if(session["logged_in"]==False): # not logged in
+            return "Not logged in.",400
+
+        if(session["logged_in_as"]=="charity" and session["cid"]!=cid): # not logged in as a charity
+            return "The cid does not match logged_in id.",400
+        '''
+        return {},204
+api.add_resource(calendarWidget, '/charity/<cid>/calendar')
 
 # ------------------------------------------------------
 
@@ -38,7 +72,23 @@ class initCharity_CharityPage(Resource):
         post_id = collection.insert_one(post).inserted_id # ObjectId of the inserted document
         return "Charity document created in the charity_page collection with ObjectId - " + str(post_id),200
 
-api.add_resource(initCharity_CharityPage, '/charity/initCharity')
+api.add_resource(initCharity_CharityPage, '/charity/<cid>/initCharity')
+
+# ------------------------------------------------------
+
+# recieve slot widget
+class getWidget_CharityPage(Resource):
+    def get(self, cid, slot_id): # slot id to return and cid of charity
+        if(collection.find_one({"cid": cid})==None): # when cid is not present
+            return "The cid %s is not present in the collection"%(cid),400
+        slot_count = int(collection.find_one({"doc_type": "common"})["slots_count"]) # doc_type common used for getting common data for the collection
+        
+        if(str(slot_id).isdigit()==False or int(slot_id)>slot_count or int(slot_id)<1): # invalid slot_id
+            return "The slot_id %s should be between 1 and %s (inclusive)"%(slot_id,slot_count),400
+        slots = int(collection.find_one({"cid": str(cid)})["slots"]) # getting the slot ID
+        return "Slot is widget "+str(slots[slot_id-1]),200 # -1 as 0 indexed (current return value is temp) 
+
+api.add_resource(getWidget_CharityPage, '/charity/<cid>/widget/<slot_id>')
 
 # ------------------------------------------------------
 
@@ -94,5 +144,8 @@ if __name__ == '__main__':
 2) session["logged_in"], session["logged_in_as"] and session["cid"] must be set with different names
 3) In the charity collection there must be a docmument similar to {"doc_type":"common","slots_count":"5","widget_count":"10"}
 4) req["slot_id"] and req["widget_id"] in updateSlot_CharityPage could be different in final integration
+5) /charity<cid>/widget/<slot_id might change later by frontend people 
+6) In calendarWidget the the format of the return value might change
+7) Check calendar widget for error checks
 '''
 
