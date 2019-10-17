@@ -21,7 +21,6 @@ calendar_collection = db['charity_calendar_widget']
 
 # ------------------------------------------------------
 
-# NEEDS TO DO ERROR HANDLING
 # handles calendar widget requests
 class calendarWidget(Resource):
     def get(self,cid): # when requesting calendar requests
@@ -162,6 +161,6 @@ if __name__ == '__main__':
 4) req["slot_id"] and req["widget_id"] in updateSlot_CharityPage could be different in final integration
 5) /charity<cid>/widget/<slot_id might change later by frontend people 
 6) In calendarWidget the the format of the return value might change
-7) Check calendar widget for error checks
+7) Check calendar widget for error checks (i think its done)
 '''
 
