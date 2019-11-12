@@ -1,0 +1,29 @@
+
+
+#disp {
+    background-color: #101e58; 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
+  }
+
+#evelist {
+    color: white;
+    text-align: center;
+    background-color: rgb(3, 27, 3); 
+
+}
+ 
+#d1 { 
+  color: white; 
+  padding: 15px 32px;
+  border-radius: 2px;
+  background-color: rgb(19, 5, 43); 
+  margin: 2px; 
+  font-size: 25px; 
+}

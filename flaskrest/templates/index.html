@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block body %}
+        <h1 id = "evelist">Upcoming Events</h1>
+        {% for e in req %}
+        <div id = "d1">
+            <div>Charity ID : {{ e.CharityID }} </div>
+            <div>Event ID : {{ e.EventID }} </div>
+            <div>Date of Event : {{ e.Date }} </div>
+            <div>Location : <a href = {{ e.LocationLink }}>{{ e.LocationLink}} </a> </div>
+            <div>Event Coordinators:
+                    {% for c in e.Coordinators %} 
+                    <div>Name : {{ c.Name }}<br />Contact : {{ c.Contact }} </div>
+                    {% endfor %}
+            </div>
+            <div>tags : {{ e.tags }} </div>
+            <br /><br /><br />
+    </div>
+        {% endfor %}
+{% endblock %}

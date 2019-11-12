@@ -1,0 +1,10 @@
+db.Event.insert({ eventName : "Rescue Animals", eventCategory : "education", eventDescription : "take care of animals", datePosted : now, dateRegister : "2019-09-21", url : "www.yahoo.com" })
+db.Event.insert({ eventName : "Donate Books", eventCategory : "education", eventDescription :"give away old textbooks", datePosted : now, dateRegister : "2019-10-05", url : "www.yahoo.com" })
+db.Event.insert({ eventName : "Give Money", eventCategory : "education", eventDescription : "take care of animals", datePosted : now, dateRegister : "2019-10-24", url : "www.yahoo.com" })
+db.Event.insert({ eventName : "Teach in schools", eventCategory : "education", eventDescription : "take care of animals", datePosted : now, dateRegister : "2019-09-30", url : "www.yahoo.com" })
+
+<div>{{ e.Date.strftime('%Y-%m-%d') }} </div>
+from list import mongo
+    app.config["MONGO_URI"] = "mongodb://localhost:27017/eventList"
+    mongo.init_app(app)
+
