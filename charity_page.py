@@ -7,53 +7,66 @@ from pymongo import MongoClient
 
 # Flask app
 app = Flask(__name__)
+
 app.secret_key = 'i love white chocolate'
+
 api = Api(app)
 
 # ------------------------------------------------------
 
 # Connecting to the carity_page collection
 client = MongoClient('localhost', 27017)
-db = client['SE']
-collection = db['charity_page']
-calendar_collection = db['charity_calendar_widget'] 
 
+db = client['SE']
+
+collection = db['charity_page']
+
+calendar_collection = db['charity_calendar_widget'] 
 
 # ------------------------------------------------------
 
 # handles calendar widget requests
 class calendarWidget(Resource):
+
     def get(self,cid): # when requesting calendar requests
         # un-comment when session is implemented
+
         '''
         if(session["logged_in"]==False): # not logged in
             return "Not logged in.",400
 
-        if(session["logged_in_as"]=="charity" and session["cid"]!=cid): # not logged in as a charity
+        if(session["logged_in_as"]!="charity" or session["cid"]!=cid): # not logged in as a charity
             return "The cid does not match logged_in id.",400
         '''
+
         c = calendar_collection.find_one({"cid": cid}); # format - {cid:id,caldata:[data_to_be_returned]}
+
         if(c==None): # check calendar events for requested cid
             return {},204
+
         else: # returning requested list
             return [eval(i) for i in c["caldata"]],200 # returns with format - [{"somedate": "content","type": "reminder"},{"somedate": "content","type": "reminder"}]    
 
     def post(self,cid): # when updating calender events
         # un-comment when session is implemented
+
         '''
         if(session["logged_in"]==False): # not logged in
             return "Not logged in.",400
 
-        if(session["logged_in_as"]=="charity" and session["cid"]!=cid): # not logged in as a charity
+        if(session["logged_in_as"]!="charity" or session["cid"]!=cid): # not logged in as a charity
             return "The cid does not match logged_in id.",400
         '''
+
         try:
             c = calendar_collection.find_one({"cid": cid}); # format - {cid:id,caldata[data_to_be_returned]}
             req = eval(request.data) # expecting json format (Ex - '{caldata:[data_to_be_added]}')
+
             if(c==None): # cid not present in DB, added new entry (Assuming logged in through sessions maintaining security)
                 post = {"cid":cid, "caldata":[str(i) for i in req]}
                 calendar_collection.insert_one(post)
                 return "Success"
+
             else: # when the cid is present in the db
                 updated = c["caldata"]
                 updated.extend([str(i) for i in req]) # adding new data to prev data
@@ -62,14 +75,17 @@ class calendarWidget(Resource):
                 newvalues = { "$set": { "caldata": updated} } # adding updated data
                 calendar_collection.update_one(myquery, newvalues) # updating the collection
                 return "Success"
+
         except:
             return "Failed",400
+
 api.add_resource(calendarWidget, '/charity/<cid>/calendar')
 
 # ------------------------------------------------------
 
 # creates a document in the collection give the charity id
 class initCharity_CharityPage(Resource):
+
     def post(self):
 
         req = eval(request.data) # expecting json format (Ex - '{"cid":731821}')
@@ -80,11 +96,13 @@ class initCharity_CharityPage(Resource):
 
         print(collection.find_one({"doc_type": "common"}))
         slot_count = collection.find_one({"doc_type": "common"})["slots_count"] # doc_type common used for getting common data for the collection
+
         post = {
             "cid": cid, # cid of the charity
             "slots": ["_empty" for _ in range(slot_count)] # slots of customisable homepage (_empty means nothing has been asigned to the slot)
         }
         post_id = collection.insert_one(post).inserted_id # ObjectId of the inserted document
+
         return "Charity document created in the charity_page collection with ObjectId - " + str(post_id),200
 
 api.add_resource(initCharity_CharityPage, '/charity/<cid>/initCharity')
@@ -93,7 +111,9 @@ api.add_resource(initCharity_CharityPage, '/charity/<cid>/initCharity')
 
 # recieve slot widget
 class getWidget_CharityPage(Resource):
+
     def get(self, cid, slot_id): # slot id to return and cid of charity
+
         if(collection.find_one({"cid": cid})==None): # when cid is not present
             return "The cid %s is not present in the collection"%(cid),400
         slot_count = int(collection.find_one({"doc_type": "common"})["slots_count"]) # doc_type common used for getting common data for the collection
@@ -101,6 +121,7 @@ class getWidget_CharityPage(Resource):
         if(str(slot_id).isdigit()==False or int(slot_id)>slot_count or int(slot_id)<1): # invalid slot_id
             return "The slot_id %s should be between 1 and %s (inclusive)"%(slot_id,slot_count),400
         slots = int(collection.find_one({"cid": str(cid)})["slots"]) # getting the slot ID
+
         return "Slot is widget "+str(slots[slot_id-1]),200 # -1 as 0 indexed (current return value is temp) 
 
 api.add_resource(getWidget_CharityPage, '/charity/<cid>/widget/<slot_id>')
@@ -109,13 +130,15 @@ api.add_resource(getWidget_CharityPage, '/charity/<cid>/widget/<slot_id>')
 
 # update a slot
 class updateSlot_CharityPage(Resource):
+
     def post(self, cid): # cid of the charity page
         # un-comment when session is implemented
+
         '''
         if(session["logged_in"]==False): # not logged in
             return "Not logged in.",400
 
-        if(session["logged_in_as"]=="charity" and session["cid"]!=cid): # not logged in as a charity
+        if(session["logged_in_as"]!="charity" or session["cid"]!=cid): # not logged in as a charity
             return "The cid does not match logged_in id.",400
         '''
 
