@@ -86,6 +86,16 @@ api.add_resource(calendarWidget, '/charity/<cid>/calendar')
 # creates a document in the collection give the charity id
 class initCharity_CharityPage(Resource):
 
+    # un-comment when session is implemented
+
+    '''
+        if(session["logged_in"]==False): # not logged in
+            return "Not logged in.",400
+
+        if(session["logged_in_as"]!="charity" or session["cid"]!=cid): # not logged in as a charity
+            return "The cid does not match logged_in id.",400
+    '''
+
     def post(self):
 
         req = eval(request.data) # expecting json format (Ex - '{"cid":731821}')
