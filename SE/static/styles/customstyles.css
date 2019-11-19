@@ -510,8 +510,8 @@ button,input[type="button"]{
 }
 
 .h3-container button{
-    animation:shake 0.6s;
-    animation-iteration-count:infinite;
+    /*animation:shake 0.6s;*/
+    /*animation-iteration-count:infinite;*/
 }
 
 .del-btn{
@@ -525,8 +525,8 @@ button,input[type="button"]{
     border:none;
     border-left:1px solid rgba(0,0,0,0.1);
     border-bottom:1px solid rgba(0,0,0,0.1);
-    animation:shake 0.6s;
-    animation-iteration-count:infinite;
+    /*animation:shake 0.6s;*/
+    /*animation-iteration-count:infinite;*/
 }
 
 .del-btn i{
@@ -694,8 +694,8 @@ h1{
     width:100%;
     overflow: auto;
     font-size:15px;
-    animation:shake 0.6s;
-    animation-iteration-count:infinite;
+    /*animation:shake 0.6s;*/
+    /*animation-iteration-count:infinite;*/
     margin-top:20px;
     margin-bottom:10px;
 }
@@ -991,15 +991,15 @@ p[contenteditable="false"],h4[contenteditable="false"]{
 }
 
 div[contenteditable='true']{
-    animation:shake 0.6s;
-    animation-iteration-count:infinite;
+    /*animation:shake 0.6s;*/
+    /*animation-iteration-count:infinite;*/
 }
 
 
 .about{
     text-align:left;
-    animation:shake 0.6s;
-    animation-iteration-count:infinite;
+    /*animation:shake 0.6s;*/
+    /*animation-iteration-count:infinite;*/
     font-size:24px;
 }
 
@@ -1067,7 +1067,6 @@ div[contenteditable="true"]{
 .tag-holder{
     display: flex;
     flex-direction: row;
-    margin-bottom:20px;
     width:100%;
 }
 
@@ -1115,8 +1114,8 @@ div[contenteditable="true"]{
 }
 
 .materials input{
-    animation:shake 0.6s;
-    animation-iteration-count:infinite;
+    /*animation:shake 0.6s;*/
+    /*animation-iteration-count:infinite;*/
 }
 
 
@@ -1181,8 +1180,8 @@ div[contenteditable="true"]{
 
 .event-desc, .eventlocation
 {
-    animation:shake 0.6s ;
-    animation-iteration-count:infinite;
+    /*animation:shake 0.6s;*/
+    /*animation-iteration-count:infinite;*/
 }
 
 .text-box h4{

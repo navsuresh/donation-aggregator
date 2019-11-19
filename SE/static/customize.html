@@ -16,8 +16,8 @@
 	<div class="navbar">
 		<div class="left-bar">
 			<span><i class="material-icons">home</i><a href="#">Home</a></span>
-			<span><i class="material-icons">person</i><a href="#">Profile</a></span>
-			<span><i class="material-icons">list_alt</i><a href="#">Events</a></span>
+			<span><i class="material-icons">person</i><a href="/profile">Profile</a></span>
+			<span><i class="material-icons">list_alt</i><a href="/events">Events</a></span>
 		</div>
 		<div class="right-bar">
 			<span><a href="#">Login</a></span>
@@ -25,8 +25,8 @@
 	</div>
 	<div class="registerwindow" id="register-3">
 		<div class="tagcontainer">
-			<p id="save-changes">Save Changes</p>
-			<input class="edit-mode" id="save-input" type="button" onclick="toggleEditingMode()" value="Save Changes">
+			<p id="save-changes">Edit Page</p>
+			<input class="edit-mode" id="save-input" type="button" onclick="toggleEditingMode()" value="Edit Page">
 			<p>Page color</p>
 			<input type="color" onchange="colorChanger(this)" value="#3e8e3e">
 			<p>Add Elements</p>
@@ -55,20 +55,20 @@
 			
 			<div class="contentbox overridegrid content-border">
 				<div class="eventorganizer">
-					<h3>Ninaada Foundation</h3>
+					<h3 id="foundation-name">Ninaada Foundation</h3>
 				</div>
 				<div class="eventlocation">
 					<i class="material-icons">my_location</i>
-					<input class="material-ip" value="Cubbon Park, Bangalore 560011">
+					<input class="material-ip" id="location-id" value="Cubbon Park, Bangalore 560011">
 				</div>				
 			</div>
 			<div class="contentbox">
 				<div class="element-div">
 					<div class="h3-container">
-						<h3 class="about"  contenteditable="true" spellcheck="false"> Our Events</h3>
+						<h3 class="about"  contenteditable="false" spellcheck="false"> Our Events</h3>
 						<button  onclick="delElement(this)"> <i class="material-icons">close</i></button>
 					</div>
-					<p class="small-text" contenteditable="true" spellcheck="false"></p>
+					<p class="small-text" contenteditable="false" spellcheck="false">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
 				</div>
 			</div>
 			<div class="contentbox">
@@ -101,7 +101,7 @@
 			<div class="contentbox">
 				<div class="element-div">
 					<div class="h3-container">
-						<h3 class="about"  contenteditable="true" spellcheck="false"> Our Events</h3>
+						<h3 class="about"  contenteditable="false" spellcheck="false"> Our Events</h3>
 						<button  onclick="delImgRow(this)	"> <i class="material-icons">close</i></button>
 					</div>
 					<div class="flex-col-box">
@@ -116,16 +116,16 @@
 								</div>
 							</div>
 							<div class="text-box">
-								<h4 class="event-desc" contenteditable="true" spellcheck="false">Sample Header</h4>
-								<p class="event-desc" contenteditable="true" spellcheck="false">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+								<h4 class="event-desc" contenteditable="false" spellcheck="false">Sample Header</h4>
+								<p class="event-desc" contenteditable="false" spellcheck="false">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
 							</div>
 							<button class="del-btn" onclick="delImgRow(this)"> <i class="material-icons">close</i></button>
 						</div>
 
 						<div class="image-row image-row-even">
 							<div class="text-box">
-								<h4 class="event-desc" contenteditable="true" spellcheck="false">Sample Header</h4>
-								<p class="event-desc" contenteditable="true" spellcheck="false">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+								<h4 class="event-desc" contenteditable="false" spellcheck="false">Sample Header</h4>
+								<p class="event-desc" contenteditable="false" spellcheck="false">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
 							</div>
 							<div class="event-box">
 								<div class="img-container-unloaded">
@@ -150,8 +150,8 @@
 								</div>
 							</div>
 							<div class="text-box">
-								<h4 class="event-desc" contenteditable="true" spellcheck="false">Sample Header</h4>
-								<p class="event-desc" contenteditable="true" spellcheck="false">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+								<h4 class="event-desc" contenteditable="false" spellcheck="false">Sample Header</h4>
+								<p class="event-desc" contenteditable="false" spellcheck="false">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
 							</div>
 							<button class="del-btn" onclick="delImgRow(this)"> <i class="material-icons">close</i></button>
 						</div>
@@ -197,7 +197,7 @@
             var componentToggle = false
             var widgetToggle = false
             var selectedFrame = null
-            var editMode = true
+            var editMode = false
 			var imageRows = 3
             function loadComponentMenu(){
                 componentToggle = !componentToggle
@@ -321,10 +321,10 @@
                         $(".contentbody").append(`<div class="contentbox">
 													<div class="element-div text-blocks">
 														<div class="h3-container">
-															<h3 class="about"  contenteditable="true" spellcheck="false"> Our Events</h3>
+															<h3 class="about"  contenteditable="false" spellcheck="false"> Our Events</h3>
 															<button  onclick="delElement(this)"> <i class="material-icons">close</i></button>
 														</div>
-														<p class="small-text" contenteditable="true" spellcheck="false"></p>
+														<p class="small-text" contenteditable="false" spellcheck="false"></p>
 													</div>
 												</div>`);
                         break;
@@ -332,7 +332,7 @@
                         $(".contentbody").append(`<div class="contentbox">
 													<div class="element-div">
 														<div class="h3-container">
-															<h3 class="about"  contenteditable="true"> Our Events</h3>
+															<h3 class="about"  contenteditable="false"> Our Events</h3>
 															<button  onclick="delElement(this)"> <i class="material-icons">close</i></button>
 														</div>
 														<div class="flex-row-box">
@@ -375,8 +375,8 @@
 														</div>
 													</div>
 													<div class="text-box">
-														<h4 class="event-desc" contenteditable="true" spellcheck="false">Sample Header</h4>
-														<p class="event-desc" contenteditable="true" spellcheck="false">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+														<h4 class="event-desc" contenteditable="false" spellcheck="false">Sample Header</h4>
+														<p class="event-desc" contenteditable="false" spellcheck="false">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
 													</div>
 													<button class="del-btn" onclick="delImgRow(this)"> <i class="material-icons">close</i></button>
 												</div>`)
@@ -386,8 +386,8 @@
 													console.log("here2",imageRows)
 						$(".flex-col-box").append(`<div class="image-row image-row-even">
 													<div class="text-box">
-														<h4 class="event-desc" contenteditable="true" spellcheck="false">Sample Header</h4>
-														<p class="event-desc" contenteditable="true" spellcheck="false">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+														<h4 class="event-desc" contenteditable="false" spellcheck="false">Sample Header</h4>
+														<p class="event-desc" contenteditable="false" spellcheck="false">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
 													</div>
 													<div class="event-box">
 														<div class="img-container-unloaded">
@@ -416,40 +416,17 @@
 
 
 			function saveData(){
-				/*var h4Arr = $(".text-box h4")
-				var pArr = $(".text-box p")
-				var imgArr = $(".event-box .translate-image")
-				let dataToSend = {}
-				let fd = new FormData()
-
-				for(let i=0;i<h4Arr.length;i++){
-					fd.append('headers',$(h4Arr[i]).text())
-					fd.append('content',$(pArr[i]).text())
-				}
-				fd.append('foundation-name',$('#foundation-name').text())
-				fd.append('event-title',$('#event-title').text())
-				fd.append('location-id',$('#location-id').text())
-				fd.append('event-date',$('#event-date').text())
-				
-				var h4Arr = $(".sub-header")
-				var pArr = $(".small-text")
-
-				for(let i=0;i<h4Arr.length;i++){
-					fd.append('sub-headers',$(h4Arr[i]).text())
-					fd.append('sub-header-content',$(pArr[i]).text())
-				}
-				console.log($("input[type='file']"))*/
-
-				
 
 				var eventsRows = $(".image-row")
 				var reader = new FileReader();
 				var pageData = {
 
-					"location-id":$("#location-id").text(),
+					"location-id":$("#location-id").val(),
+					"foundation-name":$("#foundation-name").text(),
 					"past-events":[],
 					"widgets":[],
-					"text-blocks":[]
+					"text-blocks":[],
+					"color":currentColor
 				}
 
 
@@ -505,12 +482,14 @@
 					$(".about").css({"animation":"none","border":"none"})
 					$(".event-desc").css({"animation":"none"})
 					$(".eventlocation").css({"animation":"none"})
+					$(".small-text").css({"animation":"none"})
 					$("#save-changes").text("Edit Page")
 					$("#save-input").val("Edit Page")
 					saveData()
                 }
                 else{
                     editMode = true
+					$(".small-text").css({"animation":"0.6s shake","animation-iteration-count":"infinite"})
 					$(".material-ip").css({"animation":"0.6s shake","animation-iteration-count":"infinite"}).removeClass("locked-input")
 					$("#edit-btn").show()
 					$(".h3-container button").show()
