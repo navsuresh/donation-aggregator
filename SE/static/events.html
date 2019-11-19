@@ -7,28 +7,20 @@
 	<link href="https://fonts.googleapis.com/css?family=Lato:900|Montserrat|Roboto&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="/static/styles/customstyles.css">
 	<link rel="stylesheet" type="text/css" href="/static/styles/tagstyles.css">
+	<link rel="stylesheet" type="text/css" href="/static/styles/navbar.css">
 </head>
 <body>
 	<div class="bgimage">
 		<img src="res/bg1.jpg" id="bgimage-img">
 	</div>
-	<div class="topdock">
-		<input type="text" class="searchbubble" placeholder="search..."><div class="searchbubblehandle"></div></input>
-		
-		<div class="centertopbar">
-				
-					<div class="menuitem">
-						+ ME
-					</div>
-					<div class="menuitem">
-						DONATIONS
-					</div>
-					<div class="menuitem">
-						EVENTS
-					</div>
-					<div class="menuitem">
-						PROFILE
-					</div>
+	<div class="navbar">
+		<div class="left-bar">
+			<span><i class="material-icons">home</i><a href="#">Home</a></span>
+			<span><i class="material-icons">person</i><a href="#">Profile</a></span>
+			<span><i class="material-icons">list_alt</i><a href="#">Events</a></span>
+		</div>
+		<div class="right-bar">
+			<span><a href="#">Login</a></span>
 		</div>
 	</div>
 	<div class="registerwindow">
@@ -42,7 +34,15 @@
         </div>
         <h4 id="register-blurb">Get Registered soon!</h4> 
         <div class="registerbutton">REGISTER</div>
-    </div>
+	</div>
+	<div class="registerwindow" id="register-2">
+		<div class="tagcontainer">
+			<p id="save-changes">Save Changes</p>
+			<input class="edit-mode" type="button" onclick="toggleEditingMode()" value="Save Changes">
+			<p>Page color</p>
+			<input type="color" onchange="colorChanger(this)" value="#3e8e3e">
+		</div>	
+	</div>
 	<div class="centercontent">
 		<div class="contentbody">
 			<div class="contentcover">
@@ -75,13 +75,9 @@
 			<div class="contentbox overridegrid content-border">
                 <div class="eventorganizer">
                     <h3 id="foundation-name" contenteditable="true">Ninaada Foundation</h3>
-                </div>
-                <div class="tagcontainer"> 
-                    <button id="edit-mode" onclick="toggleEditingMode()">Save Changes</button>
-                        
-                </div>				
+                </div>			
             </div>
-			<div class="contentbox overridegrid content-border" style="border-bottom:1px solid rgba(0,0,0,0.1)"> 
+			<div class="contentbox overridegrid content-border" style="border-bottom:1px solid rgba(0,0,0,0.1);border-top:1px solid rgba(0,0,0,0.1)"> 
                 <!--<div class="eventlocation">
                     <i class="material-icons">my_location</i>
                     <br>
@@ -235,15 +231,20 @@
                 if(componentToggle && widgetToggle){
                     $("#widget-menu-2").animate({"right":"0"},"fast")
                     $("#widget-menu-1").animate({"right":"-350"},"fast")
+					$(".registerwindow").animate({"right":"100px"},"fast")
                     widgetToggle = false
                 }else{
                     if(componentToggle){
                         $("body").animate({"left":"-250px"},"fast")
+						$("#register-2").animate({"right":"100px"},"fast")
                         $("#widget-menu-2").animate({"right":"0"},"fast")
+						$(".registerwindow").animate({"right":"100px"},"fast")
                     }
                     else{
                         $("body").animate({"left":"0px"},"fast")
+						$("#register-2").animate({"right":"370px"},"fast")
                         $("#widget-menu-2").animate({"right":"-350"},"fast")
+						$(".registerwindow").animate({"right":"370px"},"fast")
                     }
                     
                 }
@@ -323,11 +324,15 @@
                     if(frameParent=='close'){
                         $("body").animate({"left":"0px"},"fast")
                         $("#widget-menu-1").animate({"right":"-350"},"fast")
+						$("#register-2").animate({"right":"100px"},"fast")
+						$(".registerwindow").animate({"right":"100px"},"fast")
                         widgetToggle = false
                     }
                     else{
                         $("body").animate({"left":"-250px"},"fast")
+						$("#register-2").animate({"right":"370px"},"fast")
                         $("#widget-menu-1").animate({"right":"0"},"fast")
+						$(".registerwindow").animate({"right":"370px"},"fast")
                         widgetToggle = true
                         
                     }
@@ -437,6 +442,7 @@
 					"event-title":$("#event-title").text(),
 					"location-id":$("#location-id").text(),
 					"event-date":$("#event-date").text(),
+					"color":currentColor,
 					"past-events":[],
 					"widgets":[],
 					"text-blocks":[],
@@ -510,15 +516,15 @@
                 }
                 else{
                     editMode = true
-					$(".material-ip").css({"animation":"0.5s shake","animation-iteration-count":"infinite"}).removeClass("locked-input")
-					$(".small-text").css({"animation":"0.5s shake","animation-iteration-count":"infinite"})
+					$(".material-ip").css({"animation":"0.6s shake","animation-iteration-count":"infinite"}).removeClass("locked-input")
+					$(".small-text").css({"animation":"0.6s shake","animation-iteration-count":"infinite"})
 					$("#edit-btn").show()
 					$(".h3-container button").show()
 					$(".frame-box").css({"pointer-events":"auto"})
 					$("input[type='file']").css({"pointer-events":"auto"})
 					$(".del-btn").show()
-					$(".about").css({"animation":"0.5s shake","animation-iteration-count":"infinite","border":"1px solid rbga(0,0,0,0.1)"})
-					$("div[contenteditable='false']").css({"animation":"0.5s shake","animation-iteration-count":"infinite"}).attr("contenteditable","true")
+					$(".about").css({"animation":"0.6s shake","animation-iteration-count":"infinite","border":"1px solid rbga(0,0,0,0.1)"})
+					$("div[contenteditable='false']").css({"animation":"0.6s shake","animation-iteration-count":"infinite"}).attr("contenteditable","true")
 					$("#add-tag").show()
 					$("#tag-container").show()
 					$(".faqcontainer h3").css({"animation":"none"})
@@ -529,6 +535,45 @@
 
             followCounterInterval = setInterval(followCount,1)
 
+
+			var currentColor = "#3e8e3e"
+
+			function colorChanger(ob){
+				colorReplace(currentColor,ob.value)
+				currentColor = ob.value
+			}
+			
+			function colorReplace(findHexColor, replaceWith) {
+				// Convert rgb color strings to hex
+				// REF: https://stackoverflow.com/a/3627747/1938889
+				function rgb2hex(rgb) {
+					if (/^#[0-9A-F]{6}$/i.test(rgb)) return rgb;
+					rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+					function hex(x) {
+					return ("0" + parseInt(x).toString(16)).slice(-2);
+					}
+					return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+				}
+
+				// Select and run a map function on every tag
+				$('*').map(function(i, el) {
+					// Get the computed styles of each tag
+					var styles = window.getComputedStyle(el);
+
+					// Go through each computed style and search for "color"
+					Object.keys(styles).reduce(function(acc, k) {
+					var name = styles[k];
+					var value = styles.getPropertyValue(name);
+					if (value !== null && name.indexOf("color") >= 0) {
+						// Convert the rgb color to hex and compare with the target color
+						if (value.indexOf("rgb(") >= 0 && rgb2hex(value) === findHexColor) {
+						// Replace the color on this found color attribute
+						$(el).css(name, replaceWith);
+						}
+					}
+					});
+				});
+			}
 		</script>
 		<script>
 

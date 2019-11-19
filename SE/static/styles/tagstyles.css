@@ -28,7 +28,7 @@
 .tag{
     font-size:12px;
     color:white;
-    background:green;
+    background:#3e8e3e;
     border-radius:20px;
     text-align: center;
     padding:0px;
@@ -40,6 +40,7 @@
 
 #tag-container{
     position: relative;
+    z-index:990;
 }
 
 #tag-box{
@@ -49,7 +50,7 @@
     height:50px;
     width:110px;
     padding:0px 10px 0px 10px;
-    z-index:10;
+    z-index:9990;
 }
 #tag-suggestions{
     position: absolute;

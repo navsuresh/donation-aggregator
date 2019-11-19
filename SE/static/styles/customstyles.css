@@ -22,6 +22,16 @@ h3{
 
 }
 
+.edit-mode{
+    color:#3e8e3e !important;
+    padding:8px;
+    box-shadow: none;
+    background:none;
+    border:none;
+    border:1px solid #818181;
+    margin-bottom:20px;
+}
+
 .bgimage
 {
     position: fixed;
@@ -222,10 +232,17 @@ iframe
     
     /*border-left: 2px solid #3e8e3e;*/
 }
+
+.about{
+    color:#3e8e3e;
+}
+
 .eventtitle
 {
     color: black;
-    font-size: 32px;
+    font-size: 34px;
+    color:#3e8e3e;
+    text-align: left;
     font-weight: bold;
     margin-top:20px;
     margin-bottom:15px;
@@ -237,15 +254,20 @@ iframe
 {
     /*padding: 10px;*/
     /*border-bottom: 1px solid rgba(0,0,0,0.2);*/
+    display: flex;
+    flex-direction: column;
     padding-bottom:20px;
+    flex:0.2;
 }
+
 .eventorganizer
 {
+    flex:0.4;
     color: black;
     font-size: 20px;
     /*font-weight: bold;*/
-    padding: 10px;
     display: inline-block;
+    margin-left:auto;
 }
 .eventorganizer:hover
 {
@@ -271,10 +293,11 @@ iframe
 }
 .eventlocation
 {
-    font-size: 18px;
-    width: 40%;
-    margin: 10px;
-    padding: 10px;
+    flex:0.4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .eventlocation div
 {
@@ -323,14 +346,16 @@ button,input[type="button"]{
 
 .overridegrid{
     display: flex;
+    align-items: center;
     justify-content: space-between;
+    padding:20px 0px;
 }
 
 .widget-menu{
     position: fixed;
     right:-350px;
     display: flex;
-    top:0px;
+    top:60px;
     width:350px;
     height:100%;
     background: #f2f2f2;
@@ -485,7 +510,7 @@ button,input[type="button"]{
 }
 
 .h3-container button{
-    animation:shake 0.5s;
+    animation:shake 0.6s;
     animation-iteration-count:infinite;
 }
 
@@ -500,7 +525,7 @@ button,input[type="button"]{
     border:none;
     border-left:1px solid rgba(0,0,0,0.1);
     border-bottom:1px solid rgba(0,0,0,0.1);
-    animation:shake 0.5s;
+    animation:shake 0.6s;
     animation-iteration-count:infinite;
 }
 
@@ -668,8 +693,11 @@ h1{
 .small-text{
     width:100%;
     overflow: auto;
-    animation:shake 0.5s;
+    font-size:15px;
+    animation:shake 0.6s;
     animation-iteration-count:infinite;
+    margin-top:20px;
+    margin-bottom:10px;
 }
 
 p[contenteditable="true" spellcheck="false"]{
@@ -692,9 +720,6 @@ button{
     margin-top:3px;
 }
 
-.content-border{
-    border-top:1px solid rgba(0,0,0,0.1);
-}
 
 button{
     outline:0;
@@ -769,6 +794,7 @@ p[contenteditable="false"],h4[contenteditable="false"]{
 #widget-row-x{
     display: flex;
     justify-content: flex-end;
+    margin-top:0px;
 }
 
 @media only screen and (max-width: 600px) {
@@ -783,7 +809,9 @@ p[contenteditable="false"],h4[contenteditable="false"]{
     font-size: 20px;
     /*font-weight: bold;*/
     padding: 10px;
+    padding-left:0px;
     display: inline-block;
+    margin:0px;
 }
 .eventorganizer:hover
 {
@@ -854,11 +882,22 @@ p[contenteditable="false"],h4[contenteditable="false"]{
     padding: 20px;
     width: 15%;
     top: 150px;
-    left: 78%;
+    right:100px;
     z-index:5;
     box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.3);
     text-align: center;
 }
+
+#register-2{
+    top:350px;
+    background:white;
+}
+
+#register-3{
+    top:150px;
+    background:white;
+}
+
 .registerfraction
 {
     font-size: 28px;
@@ -915,7 +954,8 @@ p[contenteditable="false"],h4[contenteditable="false"]{
 .faqcontainer
 {
     /*border: 1px solid red;*/
-    padding: 10px 40px;
+    padding: 20px 40px;
+    margin-top:20px
 }
 .faq
 {
@@ -931,12 +971,12 @@ p[contenteditable="false"],h4[contenteditable="false"]{
 .question
 {
     margin-bottom:8px;
-    font-size: 19px;
+    font-size: 18px;
     font-weight: bold;
 }
 .answer
 {
-    font-size: 16px;
+    font-size: 15px;
 }
 .addfaqbutton
 {
@@ -951,16 +991,16 @@ p[contenteditable="false"],h4[contenteditable="false"]{
 }
 
 div[contenteditable='true']{
-    animation:shake 0.5s;
+    animation:shake 0.6s;
     animation-iteration-count:infinite;
 }
 
 
 .about{
     text-align:left;
-    animation:shake 0.5s;
+    animation:shake 0.6s;
     animation-iteration-count:infinite;
-    margin-bottom:20px;
+    font-size:24px;
 }
 
 #register-blurb{
@@ -1032,11 +1072,11 @@ div[contenteditable="true"]{
 }
 
 @keyframes shake{
-    0% { transform: translate(2px, 0) }
-    25% { transform: translate(-2px, 0)  }
-    50% { transform: translate(2px, 0) }
-    75% { transform: translate(-2px, 0)}
-    100% { transform: translate(2px, 0) }
+    0% { transform: translate(1px, 0) }
+    25% { transform: translate(-1px, 0)  }
+    50% { transform: translate(1px, 0) }
+    75% { transform: translate(-1px, 0)}
+    100% { transform: translate(1px, 0) }
 }
 
 .faqcontainer h3{
@@ -1054,14 +1094,18 @@ div[contenteditable="true"]{
 }
 
 .materials i{
-    font-size:32px;
+    font-size:42px;
     color: #3e8e3e;
 }
 
-.materials input{
+.materials input, .material-ip{
     text-align: center;
     font-size:16px;
     width:150px;
+}
+
+.material-ip{
+    width:109%;
 }
 
 .locked-input{
@@ -1071,6 +1115,90 @@ div[contenteditable="true"]{
 }
 
 .materials input{
-    animation:shake 0.5s;
+    animation:shake 0.6s;
     animation-iteration-count:infinite;
+}
+
+
+#search-tags p{
+    position: relative;
+    margin:0px;
+    padding:4px;
+    border:1px solid rgba(0,0,0,0.3);
+    border-top:none;
+    font-size:12px;
+    width:110px;
+    transition: 0.3s ease all;
+    cursor: pointer;
+    background:white;
+}
+
+#choose-tag{
+    width:110px;
+    padding:4px;
+    border:1px solid rgba(0,0,0,0.3);
+    font-size:12px;
+    outline:none;
+}
+
+#search-tags p:hover{
+    background:#3e8e3e !important;
+    color:white !important;
+}
+
+.tag{
+    font-size:12px;
+    color:white;
+    background:#3e8e3e;
+    border-radius:20px;
+    text-align: center;
+    padding:0px;
+    margin:0px;
+    padding:3px 8px;
+    margin-right:8px;
+    cursor: pointer;
+}
+
+#tag-container{
+    position: relative;
+    z-index:990;
+}
+
+#tag-box{
+    display: flex;
+    align-items: center;
+    height:50px;
+    width:110px;
+    padding:0px 10px 0px 10px;
+    z-index:9990;
+}
+#tag-suggestions{
+    position: absolute;
+    top:25px;
+    left:0px;
+    width:110px;
+}
+
+.event-desc, .eventlocation
+{
+    animation:shake 0.6s ;
+    animation-iteration-count:infinite;
+}
+
+.text-box h4{
+    color:#3e8e3e;
+}
+
+input[type="color"]{
+    height:17px;
+    width:100%;
+    margin-bottom:20px;
+}
+
+.tagcontainer p {
+    text-align: left;
+    color:rgba(0,0,0,0.6);
+    font-weight: bold;
+    margin-bottom:5px;
+    font-size: 16px;
 }

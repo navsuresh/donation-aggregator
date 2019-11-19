@@ -6,32 +6,33 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<link href="https://fonts.googleapis.com/css?family=Lato:900|Montserrat|Roboto&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="/static/styles/customstyles.css">
+	<link rel="stylesheet" type="text/css" href="/static/styles/navbar.css">
 	
 </head>
 <body>
 	<div class="bgimage">
 		<img src="res/bg1.jpg" id="bgimage-img">
 	</div>
-	<div class="topdock">
-		<input type="text" class="searchbubble" placeholder="search..."><div class="searchbubblehandle"></div></input>
-		
-		<div class="centertopbar">
-				
-					<div class="menuitem">
-						+ ME
-					</div>
-					<div class="menuitem">
-						DONATIONS
-					</div>
-					<div class="menuitem">
-						EVENTS
-					</div>
-					<div class="menuitem">
-						PROFILE
-					</div>
+	<div class="navbar">
+		<div class="left-bar">
+			<span><i class="material-icons">home</i><a href="#">Home</a></span>
+			<span><i class="material-icons">person</i><a href="#">Profile</a></span>
+			<span><i class="material-icons">list_alt</i><a href="#">Events</a></span>
+		</div>
+		<div class="right-bar">
+			<span><a href="#">Login</a></span>
 		</div>
 	</div>
-	
+	<div class="registerwindow" id="register-3">
+		<div class="tagcontainer">
+			<p id="save-changes">Save Changes</p>
+			<input class="edit-mode" id="save-input" type="button" onclick="toggleEditingMode()" value="Save Changes">
+			<p>Page color</p>
+			<input type="color" onchange="colorChanger(this)" value="#3e8e3e">
+			<p>Add Elements</p>
+			<button class="edit-mode" onclick="loadComponentMenu()">Add Elements</button>
+		</div>	
+	</div>
 	<div class="centercontent">
 		<div class="contentbody">
 			<div class="contentcover">
@@ -56,15 +57,9 @@
 				<div class="eventorganizer">
 					<h3>Ninaada Foundation</h3>
 				</div>
-				<div class="tagcontainer"> 
-					<button id="edit-btn" onclick="loadComponentMenu()">Add Elements</button>
-					<button id="edit-mode" onclick="toggleEditingMode()">Save Changes</button>
-						
-				</div>
 				<div class="eventlocation">
 					<i class="material-icons">my_location</i>
-					<br>
-					<div id="location-id">Jayanagara 4th block, behind mantri mall, opposite KFC,560079</div>
+					<input class="material-ip" value="Cubbon Park, Bangalore 560011">
 				</div>				
 			</div>
 			<div class="contentbox">
@@ -121,16 +116,16 @@
 								</div>
 							</div>
 							<div class="text-box">
-								<h4 id="event-desc" contenteditable="true" spellcheck="false">Sample Header</h4>
-								<p id="event-desc" contenteditable="true" spellcheck="false">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+								<h4 class="event-desc" contenteditable="true" spellcheck="false">Sample Header</h4>
+								<p class="event-desc" contenteditable="true" spellcheck="false">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
 							</div>
 							<button class="del-btn" onclick="delImgRow(this)"> <i class="material-icons">close</i></button>
 						</div>
 
 						<div class="image-row image-row-even">
 							<div class="text-box">
-								<h4 id="event-desc" contenteditable="true" spellcheck="false">Sample Header</h4>
-								<p id="event-desc" contenteditable="true" spellcheck="false">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+								<h4 class="event-desc" contenteditable="true" spellcheck="false">Sample Header</h4>
+								<p class="event-desc" contenteditable="true" spellcheck="false">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
 							</div>
 							<div class="event-box">
 								<div class="img-container-unloaded">
@@ -155,8 +150,8 @@
 								</div>
 							</div>
 							<div class="text-box">
-								<h4 id="event-desc" contenteditable="true" spellcheck="false">Sample Header</h4>
-								<p id="event-desc" contenteditable="true" spellcheck="false">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+								<h4 class="event-desc" contenteditable="true" spellcheck="false">Sample Header</h4>
+								<p class="event-desc" contenteditable="true" spellcheck="false">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
 							</div>
 							<button class="del-btn" onclick="delImgRow(this)"> <i class="material-icons">close</i></button>
 						</div>
@@ -209,14 +204,17 @@
                 if(componentToggle && widgetToggle){
                     $("#widget-menu-2").animate({"right":"0"},"fast")
                     $("#widget-menu-1").animate({"right":"-350"},"fast")
+					$(".registerwindow").animate({"right":"100px"},"fast")
                     widgetToggle = false
                 }else{
                     if(componentToggle){
                         $("body").animate({"left":"-250px"},"fast")
+						$(".registerwindow").animate({"right":"370px"},"fast")
                         $("#widget-menu-2").animate({"right":"0"},"fast")
                     }
                     else{
                         $("body").animate({"left":"0px"},"fast")
+						$(".registerwindow").animate({"right":"100px"},"fast")
                         $("#widget-menu-2").animate({"right":"-350"},"fast")
                     }
                     
@@ -290,17 +288,20 @@
                 if(componentToggle && widgetToggle){
                     $("#widget-menu-1").animate({"right":"0"},"fast")
                     $("#widget-menu-2").animate({"right":"-350"},"fast")
+					$(".registerwindow").animate({"right":"100px"},"fast")
                     componentToggle = false
                 }
                 else{
                     if(frameParent=='close'){
                         $("body").animate({"left":"0px"},"fast")
                         $("#widget-menu-1").animate({"right":"-350"},"fast")
+						$(".registerwindow").animate({"right":"370px"},"fast")
                         widgetToggle = false
                     }
                     else{
                         $("body").animate({"left":"-250px"},"fast")
                         $("#widget-menu-1").animate({"right":"0"},"fast")
+						$(".registerwindow").animate({"right":"100px"},"fast")
                         widgetToggle = true
                         
                     }
@@ -374,8 +375,8 @@
 														</div>
 													</div>
 													<div class="text-box">
-														<h4 id="event-desc" contenteditable="true" spellcheck="false">Sample Header</h4>
-														<p id="event-desc" contenteditable="true" spellcheck="false">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+														<h4 class="event-desc" contenteditable="true" spellcheck="false">Sample Header</h4>
+														<p class="event-desc" contenteditable="true" spellcheck="false">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
 													</div>
 													<button class="del-btn" onclick="delImgRow(this)"> <i class="material-icons">close</i></button>
 												</div>`)
@@ -385,8 +386,8 @@
 													console.log("here2",imageRows)
 						$(".flex-col-box").append(`<div class="image-row image-row-even">
 													<div class="text-box">
-														<h4 id="event-desc" contenteditable="true" spellcheck="false">Sample Header</h4>
-														<p id="event-desc" contenteditable="true" spellcheck="false">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+														<h4 class="event-desc" contenteditable="true" spellcheck="false">Sample Header</h4>
+														<p class="event-desc" contenteditable="true" spellcheck="false">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
 													</div>
 													<div class="event-box">
 														<div class="img-container-unloaded">
@@ -495,20 +496,32 @@
 
                 if(editMode){
                     editMode = false
+					$(".material-ip").css({"animation":"none"}).addClass("locked-input")
 					$("#edit-btn").hide()
 					$(".h3-container button").hide()
 					$(".frame-box").css({"pointer-events":"none"})
 					$("input[type='file']").css({"pointer-events":"none"})
 					$(".del-btn").hide()
+					$(".about").css({"animation":"none","border":"none"})
+					$(".event-desc").css({"animation":"none"})
+					$(".eventlocation").css({"animation":"none"})
+					$("#save-changes").text("Edit Page")
+					$("#save-input").val("Edit Page")
 					saveData()
                 }
                 else{
                     editMode = true
+					$(".material-ip").css({"animation":"0.6s shake","animation-iteration-count":"infinite"}).removeClass("locked-input")
 					$("#edit-btn").show()
 					$(".h3-container button").show()
 					$(".frame-box").css({"pointer-events":"auto"})
 					$("input[type='file']").css({"pointer-events":"auto"})
+					$(".event-desc").css({"animation":"0.6s shake","animation-iteration-count":"infinite"})
+					$(".about").css({"animation":"0.6s shake","animation-iteration-count":"infinite"})
+					$(".eventlocation").css({"animation":"0.6s shake","animation-iteration-count":"infinite"})
 					$(".del-btn").show()
+					$("#save-changes").text("Save Changes")
+					$("#save-input").val("Save Changes")
                 }
 				
 				$("p[contenteditable] , h3[contenteditable],h4[contenteditable]").attr("contenteditable",editMode)
@@ -516,6 +529,44 @@
 
             followCounterInterval = setInterval(followCount,1)
 
+			var currentColor = "#3e8e3e"
+
+			function colorChanger(ob){
+				colorReplace(currentColor,ob.value)
+				currentColor = ob.value
+			}
+			
+			function colorReplace(findHexColor, replaceWith) {
+				// Convert rgb color strings to hex
+				// REF: https://stackoverflow.com/a/3627747/1938889
+				function rgb2hex(rgb) {
+					if (/^#[0-9A-F]{6}$/i.test(rgb)) return rgb;
+					rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+					function hex(x) {
+					return ("0" + parseInt(x).toString(16)).slice(-2);
+					}
+					return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+				}
+
+				// Select and run a map function on every tag
+				$('*').map(function(i, el) {
+					// Get the computed styles of each tag
+					var styles = window.getComputedStyle(el);
+
+					// Go through each computed style and search for "color"
+					Object.keys(styles).reduce(function(acc, k) {
+					var name = styles[k];
+					var value = styles.getPropertyValue(name);
+					if (value !== null && name.indexOf("color") >= 0) {
+						// Convert the rgb color to hex and compare with the target color
+						if (value.indexOf("rgb(") >= 0 && rgb2hex(value) === findHexColor) {
+						// Replace the color on this found color attribute
+						$(el).css(name, replaceWith);
+						}
+					}
+					});
+				});
+			}
         </script>
 </body>
 </html>
