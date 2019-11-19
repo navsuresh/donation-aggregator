@@ -12,6 +12,13 @@ mongoConn = pymongo.MongoClient("mongodb://localhost:27017/")
 db = mongoConn["charity_aggregator"]
 col = db["user_details"]
 app = Flask(__name__)
+@app.after_request
+
+def after_request(response):
+  response.headers.add('Access-Control-Allow-Origin', '*')
+  response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+  response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+  return response
 api = Api(app)
 app.secret_key = "chartiyaggregator" 
 
@@ -106,17 +113,37 @@ class SetNewPassword(Resource):
         newvalues = { "$set": { "password": bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt()) } }
         updateDB = col.update_one(myquery,newvalues)
         del linkReset[url]
-            
-        
 
-api.add_resource(LoginPage, '/login')
+class CollectCustomPageData(Resource):
+    
+    def post(self):
+        print(request.get_json(force=True))
+    
+    def get(self):
+        print(request.args)
+        return "sent"
+
+class CustomProfilePage(Resource):
+    
+    def get(self):
+        return app.send_static_file('customize.html')
+    
+class EventsPage(Resource):
+    
+    def get(self):
+        return app.send_static_file('events.html')
+
+api.add_resource(LoginPage, '/')
 api.add_resource(SignupPage, '/signup')
+api.add_resource(CustomProfilePage, '/profile')
+api.add_resource(EventsPage, '/events')
 api.add_resource(SendMail, '/sendMail')
 api.add_resource(VerifyOTP, '/verifyotp')
 api.add_resource(Login, '/login/senddata')
 api.add_resource(ForgotPassword, '/passwordreset')
 api.add_resource(ValidateResetPassword, '/validatepassword/<url>')
 api.add_resource(SetNewPassword, '/resetpassword')
+api.add_resource(CollectCustomPageData, '/customdata')
 
 if __name__ == '__main__':
     app.run(port=4000,debug=True)

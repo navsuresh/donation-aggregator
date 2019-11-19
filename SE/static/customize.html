@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Donation Aggregator Service</title>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Lato:900|Montserrat|Roboto&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="/static/styles/customstyles.css">
+	
+</head>
+<body>
+	<div class="bgimage">
+		<img src="res/bg1.jpg" id="bgimage-img">
+	</div>
+	<div class="topdock">
+		<input type="text" class="searchbubble" placeholder="search..."><div class="searchbubblehandle"></div></input>
+		
+		<div class="centertopbar">
+				
+					<div class="menuitem">
+						+ ME
+					</div>
+					<div class="menuitem">
+						DONATIONS
+					</div>
+					<div class="menuitem">
+						EVENTS
+					</div>
+					<div class="menuitem">
+						PROFILE
+					</div>
+		</div>
+	</div>
+	
+	<div class="centercontent">
+		<div class="contentbody">
+			<div class="contentcover">
+				<div class="unloaded-cover-picture">
+					<i class="material-icons">add</i>
+					<input type="file" onchange="loadCoverPic(this)">
+				</div>
+				<div class="loaded-cover-picture">
+					<img src="#">
+				</div>
+				<div class="follow-nav">
+					<div class="follower-count">
+						<h3 id="follow-count">1700</h3>
+					</div>
+					<div class="follow">
+						<input id="follow-btn" type="button" value="Follow" onclick="increaseFol()">
+					</div>
+				</div>
+			</div>
+			
+			<div class="contentbox overridegrid content-border">
+				<div class="eventorganizer">
+					<h3>Ninaada Foundation</h3>
+				</div>
+				<div class="tagcontainer"> 
+					<button id="edit-btn" onclick="loadComponentMenu()">Add Elements</button>
+					<button id="edit-mode" onclick="toggleEditingMode()">Save Changes</button>
+						
+				</div>
+				<div class="eventlocation">
+					<i class="material-icons">my_location</i>
+					<br>
+					<div id="location-id">Jayanagara 4th block, behind mantri mall, opposite KFC,560079</div>
+				</div>				
+			</div>
+			<div class="contentbox">
+				<div class="element-div">
+					<div class="h3-container">
+						<h3 class="about"  contenteditable="true" spellcheck="false"> Our Events</h3>
+						<button  onclick="delElement(this)"> <i class="material-icons">close</i></button>
+					</div>
+					<p class="small-text" contenteditable="true" spellcheck="false"></p>
+				</div>
+			</div>
+			<div class="contentbox">
+				<div class="element-div">
+					<div class="h3-container" id="widget-row-x">
+						<button  onclick="delElement(this)"> <i class="material-icons">close</i></button>
+					</div>
+					<div class="flex-row-box">
+						<div class="frame-box" onclick="loadWidgetMenu(this)">
+							<div class="frame-button">
+								<i class="material-icons">add</i>
+							</div>
+							<iframe></iframe>
+						</div>
+						<div class="frame-box" onclick="loadWidgetMenu(this)">
+							<div class="frame-button">
+								<i class="material-icons">add</i>
+							</div>
+							<iframe></iframe>
+						</div>
+						<div class="frame-box" onclick="loadWidgetMenu(this)">
+							<div class="frame-button">
+								<i class="material-icons">add</i>
+							</div>
+							<iframe></iframe>
+						</div>
+					</div>
+				</div>
+			</div>		
+			<div class="contentbox">
+				<div class="element-div">
+					<div class="h3-container">
+						<h3 class="about"  contenteditable="true" spellcheck="false"> Our Events</h3>
+						<button  onclick="delImgRow(this)	"> <i class="material-icons">close</i></button>
+					</div>
+					<div class="flex-col-box">
+						<div class="image-row image-row-odd">
+							<div class="event-box">
+								<div class="img-container-unloaded">
+									<i class="material-icons">add</i>
+									<input class='translateImage' type="file" accept="image/*"  onchange="loadImage(this)"  size="100">
+								</div>
+								<div class="img-container-loaded">
+									<img class="card-img" src="#">
+								</div>
+							</div>
+							<div class="text-box">
+								<h4 id="event-desc" contenteditable="true" spellcheck="false">Sample Header</h4>
+								<p id="event-desc" contenteditable="true" spellcheck="false">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+							</div>
+							<button class="del-btn" onclick="delImgRow(this)"> <i class="material-icons">close</i></button>
+						</div>
+
+						<div class="image-row image-row-even">
+							<div class="text-box">
+								<h4 id="event-desc" contenteditable="true" spellcheck="false">Sample Header</h4>
+								<p id="event-desc" contenteditable="true" spellcheck="false">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+							</div>
+							<div class="event-box">
+								<div class="img-container-unloaded">
+									<i class="material-icons">add</i>
+									<input class='translateImage' type="file" accept="image/*"  onchange="loadImage(this)"  size="100">
+								</div>
+								<div class="img-container-loaded">
+									<img class="card-img" src="#">
+								</div>
+							</div>
+							<button class="del-btn" onclick="delImgRow(this)"> <i class="material-icons">close</i></button>
+						</div>
+
+						<div class="image-row image-row-even">
+							<div class="event-box">
+								<div class="img-container-unloaded">
+									<i class="material-icons">add</i>
+									<input class='translateImage' type="file" accept="image/*"  onchange="loadImage(this)"  size="100">
+								</div>
+								<div class="img-container-loaded">
+									<img class="card-img" src="#">
+								</div>
+							</div>
+							<div class="text-box">
+								<h4 id="event-desc" contenteditable="true" spellcheck="false">Sample Header</h4>
+								<p id="event-desc" contenteditable="true" spellcheck="false">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+							</div>
+							<button class="del-btn" onclick="delImgRow(this)"> <i class="material-icons">close</i></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="widget-menu" id="widget-menu-1">
+		<div class="close-div" onclick="loadWidgetMenu('close')">
+			<h3>Widgets</h3>
+			<i class="material-icons close-widget">close</i>
+		</div>
+		<div class="widgets" id="widget-1" onclick="addWidget('calendar.html')">
+
+		</div>
+		<div src="tagsys.html"  class="widgets" id="widget-2" onclick="addWidget('tagsys.html')">
+
+		</div>
+		<div class="widgets" id="widget-3">
+
+		</div>
+	</div>
+
+	<div class="widget-menu" id="widget-menu-2">
+		<div class="close-div" onclick="loadComponentMenu()">
+			<h3>Components</h3>
+			<i class="material-icons close-widget">close</i>
+		</div>
+		<div class="widgets" id="component-1" onclick="addComponents(1)">
+			
+		</div>
+		<div class="widgets" id="component-2" onclick="addComponents(2)">
+
+		</div>
+		<div class="widgets" id="component-3" onclick="addComponents(3)">
+
+		</div>
+	</div>
+
+	<script>
+            var componentToggle = false
+            var widgetToggle = false
+            var selectedFrame = null
+            var editMode = true
+			var imageRows = 3
+            function loadComponentMenu(){
+                componentToggle = !componentToggle
+                if(componentToggle && widgetToggle){
+                    $("#widget-menu-2").animate({"right":"0"},"fast")
+                    $("#widget-menu-1").animate({"right":"-350"},"fast")
+                    widgetToggle = false
+                }else{
+                    if(componentToggle){
+                        $("body").animate({"left":"-250px"},"fast")
+                        $("#widget-menu-2").animate({"right":"0"},"fast")
+                    }
+                    else{
+                        $("body").animate({"left":"0px"},"fast")
+                        $("#widget-menu-2").animate({"right":"-350"},"fast")
+                    }
+                    
+                }
+                
+            
+            }
+
+
+			$(".editable-p").on("focus",function(){
+				if($(this).html()=="Sample Text"){
+					$(this).html("&zwnj;")
+				}
+			})
+
+			$(".editable-p").on("blur",function(){
+				if($(this).html()=="\u200c"){
+					$(this).html("Sample Text")
+				}
+			})
+
+            
+            function callLoaders(){
+                followCount()
+            }
+
+            function delElement(ref){
+                $(ref).parent().parent().parent().slideUp(350,function(){
+                    $(this).remove()
+                })
+
+            }
+
+			function delImgRow(ob){
+				$(ob).parent().slideUp(function(){
+					$(ob).parent().remove()
+				})
+			}
+
+            function loadCoverPic(input){
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $($(input).parent().parent().children(".loaded-cover-picture").children()[0]).attr('src', e.target.result);
+                        $(input).parent().parent().children(".loaded-cover-picture").show()
+                        $(input).parent().css({"opacity":"0"})
+						$("#bgimage-img").attr("src",e.target.result)
+                    };
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            function loadImage(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $($(input).parent().parent().children(".img-container-loaded").children()[0]).attr('src', e.target.result);
+                        $(input).parent().parent().children(".img-container-loaded").show()
+                        $(input).parent().css({"opacity":"0"})
+                    };
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+            
+            function loadWidgetMenu(frameParent){
+                widgetToggle = true
+                if(componentToggle && widgetToggle){
+                    $("#widget-menu-1").animate({"right":"0"},"fast")
+                    $("#widget-menu-2").animate({"right":"-350"},"fast")
+                    componentToggle = false
+                }
+                else{
+                    if(frameParent=='close'){
+                        $("body").animate({"left":"0px"},"fast")
+                        $("#widget-menu-1").animate({"right":"-350"},"fast")
+                        widgetToggle = false
+                    }
+                    else{
+                        $("body").animate({"left":"-250px"},"fast")
+                        $("#widget-menu-1").animate({"right":"0"},"fast")
+                        widgetToggle = true
+                        
+                    }
+
+                }
+                selectedFrame = frameParent
+            }
+
+            function addWidget(path){
+                $($(selectedFrame).children()[1]).attr("src",path)
+                $($(selectedFrame).children()[0]).hide()
+            }
+
+            function addComponents(no){
+                switch(no){
+                    case 1:
+                        $(".contentbody").append(`<div class="contentbox">
+													<div class="element-div text-blocks">
+														<div class="h3-container">
+															<h3 class="about"  contenteditable="true" spellcheck="false"> Our Events</h3>
+															<button  onclick="delElement(this)"> <i class="material-icons">close</i></button>
+														</div>
+														<p class="small-text" contenteditable="true" spellcheck="false"></p>
+													</div>
+												</div>`);
+                        break;
+                    case 2:
+                        $(".contentbody").append(`<div class="contentbox">
+													<div class="element-div">
+														<div class="h3-container">
+															<h3 class="about"  contenteditable="true"> Our Events</h3>
+															<button  onclick="delElement(this)"> <i class="material-icons">close</i></button>
+														</div>
+														<div class="flex-row-box">
+															<div class="frame-box" onclick="loadWidgetMenu(this)">
+																<div class="frame-button">
+																	<i class="material-icons">add</i>
+																</div>
+																<iframe></iframe>
+															</div>
+															<div class="frame-box" onclick="loadWidgetMenu(this)">
+																<div class="frame-button">
+																	<i class="material-icons">add</i>
+																</div>
+																<iframe></iframe>
+															</div>
+															<div class="frame-box" onclick="loadWidgetMenu(this)">
+																<div class="frame-button">
+																	<i class="material-icons">add</i>
+																</div>
+																<iframe></iframe>
+															</div>
+														</div>
+													</div>
+												</div>`)
+												
+                        break;
+                    case 3:
+					
+                    if(imageRows%2==0)
+					{
+						console.log("here1",imageRows)
+                        $(".flex-col-box").append(`<div class="image-row image-row-odd">
+													<div class="event-box">
+														<div class="img-container-unloaded">
+															<i class="material-icons">add</i>
+															<input class='translateImage' type="file" accept="image/*"  onchange="loadImage(this)"  size="100">
+														</div>
+														<div class="img-container-loaded">
+															<img class="card-img" src="#">
+														</div>
+													</div>
+													<div class="text-box">
+														<h4 id="event-desc" contenteditable="true" spellcheck="false">Sample Header</h4>
+														<p id="event-desc" contenteditable="true" spellcheck="false">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+													</div>
+													<button class="del-btn" onclick="delImgRow(this)"> <i class="material-icons">close</i></button>
+												</div>`)
+					}
+						
+												else{
+													console.log("here2",imageRows)
+						$(".flex-col-box").append(`<div class="image-row image-row-even">
+													<div class="text-box">
+														<h4 id="event-desc" contenteditable="true" spellcheck="false">Sample Header</h4>
+														<p id="event-desc" contenteditable="true" spellcheck="false">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+													</div>
+													<div class="event-box">
+														<div class="img-container-unloaded">
+															<i class="material-icons">add</i>
+															<input class='translateImage' type="file" accept="image/*"  onchange="loadImage(this)"  size="100">
+														</div>
+														<div class="img-container-loaded">
+															<img class="card-img" src="#">
+														</div>
+													</div>
+													<button class="del-btn" onclick="delImgRow(this)"> <i class="material-icons">close</i></button>
+												</div>`)
+												}
+						imageRows++
+                        break;
+                }
+            }
+
+            function followCount(){
+                $("#follow-count").text(parseInt($("#follow-count").text())+1)
+                if($("#follow-count").text()=="2000"){
+                    clearInterval(followCounterInterval)
+                }
+            }
+
+
+
+			function saveData(){
+				/*var h4Arr = $(".text-box h4")
+				var pArr = $(".text-box p")
+				var imgArr = $(".event-box .translate-image")
+				let dataToSend = {}
+				let fd = new FormData()
+
+				for(let i=0;i<h4Arr.length;i++){
+					fd.append('headers',$(h4Arr[i]).text())
+					fd.append('content',$(pArr[i]).text())
+				}
+				fd.append('foundation-name',$('#foundation-name').text())
+				fd.append('event-title',$('#event-title').text())
+				fd.append('location-id',$('#location-id').text())
+				fd.append('event-date',$('#event-date').text())
+				
+				var h4Arr = $(".sub-header")
+				var pArr = $(".small-text")
+
+				for(let i=0;i<h4Arr.length;i++){
+					fd.append('sub-headers',$(h4Arr[i]).text())
+					fd.append('sub-header-content',$(pArr[i]).text())
+				}
+				console.log($("input[type='file']"))*/
+
+				
+
+				var eventsRows = $(".image-row")
+				var reader = new FileReader();
+				var pageData = {
+
+					"location-id":$("#location-id").text(),
+					"past-events":[],
+					"widgets":[],
+					"text-blocks":[]
+				}
+
+
+				eventsRows.each(function(ind,element){
+					pageData["past-events"].push({
+						"event-number":ind,
+						"event-header":$(element).children().find("h4").text(),
+						"event-about":$(element).children().find("p").text(),
+						//"image":$(element).children().find(".translate-image")[0].files[0]
+					})
+					
+				})
+
+				var textBlocks = $(".text-blocks")
+
+				textBlocks.each(function(ind,element){
+					pageData["text-blocks"].push({
+						"text-number":ind,
+						"text-header":$(element).children().find("h3").text(),
+						"text-about":$(element).children().find("p").text()
+					})
+					
+				})
+				
+
+				$.ajax({
+					url:"http://localhost:4000/customdata",
+					async:true,
+					method:"post",
+					cache: false,
+					data: JSON.stringify(pageData),
+					contentType: "application/json",
+					processData: false,
+					success:function(){
+						
+						console.log("sent")
+					}
+				})
+					
+			}
+
+            function toggleEditingMode(){
+                
+
+                if(editMode){
+                    editMode = false
+					$("#edit-btn").hide()
+					$(".h3-container button").hide()
+					$(".frame-box").css({"pointer-events":"none"})
+					$("input[type='file']").css({"pointer-events":"none"})
+					$(".del-btn").hide()
+					saveData()
+                }
+                else{
+                    editMode = true
+					$("#edit-btn").show()
+					$(".h3-container button").show()
+					$(".frame-box").css({"pointer-events":"auto"})
+					$("input[type='file']").css({"pointer-events":"auto"})
+					$(".del-btn").show()
+                }
+				
+				$("p[contenteditable] , h3[contenteditable],h4[contenteditable]").attr("contenteditable",editMode)
+            }
+
+            followCounterInterval = setInterval(followCount,1)
+
+        </script>
+</body>
+</html>

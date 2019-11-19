@@ -1,9 +1,8 @@
-<<<<<<< HEAD
 <html>
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Lato:900|Montserrat|Roboto&display=swap" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="/static/corecss.css">
+        <link rel="stylesheet" type="text/css" href="/static/styles/corecss.css">
     </head>
     <body>
         
@@ -58,65 +57,4 @@
             }
         </script>
     </body>
-=======
-<html>
-    <head>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <link href="https://fonts.googleapis.com/css?family=Lato:900|Montserrat|Roboto&display=swap" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="/static/corecss.css">
-    </head>
-    <body>
-        
-        <div class="right-container" style="box-shadow:0px 5px 100px 20px rgba(0,0,0,0.3)">
-            <div id="sign-up-for-users">
-                <div class="container-header">
-                    <h2> Reset Password </h2>
-                    <!--<input value="Click for user login" type="button" id="user-select" onclick="selectUser(this.id)"><input value="Click for charity login"  type="button" id="charity-select" onclick="selectUser(this.id)">-->
-                </div>
-                <div class="container-body">
-                    <p>New password</p>
-                    <input class="signup-input" type="password" id="user-password">
-                    <p>Confirm Password</p>
-                    <input class="signup-input" type="password" id="confirm-user-password" onkeyup="comparePasswords()">
-                    <p id="comparison-status"></p>
-                    <div class="container-footer">
-                        <input type="submit" class="login-btn" onclick="resetPassword()" value="Reset password">
-                    </div>  
-                </div>
-                
-            </div>
-        </div>
-            
-
-        <script>
-        
-            function comparePasswords()
-            {
-                if($("#user-password").val()==""){
-                    return
-                }
-                $("#comparison-status").css({"opacity":"1"})
-                if($("#user-password").val()==$("#confirm-user-password").val()){
-                    $("#comparison-status").text("Passwords match").css({"color":"#5cb85c"})
-                }
-                else{
-                    $("#comparison-status").text("Passwords do not match").css({"color":"#d9534f"})
-                }
-            }
-
-            function resetPassword(){
-                $.ajax({
-                    url:"/resetpassword",
-                    method:"POST",
-                    data:JSON.stringify({"password":$("#user-password").val(),"url":(""+window.location.href).split("/").pop()}),
-                    contentType: "application/json; charset=utf-8",
-                    success:function(data){
-                        window.location.href = "http://localhost:4000/login"
-                    }
-                })
-
-            }
-        </script>
-    </body>
->>>>>>> 0ba6732b2ee23e19b0ba4d00d61772cefe6f9b33
 </html>
