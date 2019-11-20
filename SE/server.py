@@ -129,7 +129,6 @@ class CollectCustomPageData(Resource):
 class CustomProfilePage(Resource):
     
     def get(self):
-        print("cookies",request.cookies)
         return app.send_static_file('customize.html')
     
 class EventsPage(Resource):
@@ -150,4 +149,4 @@ api.add_resource(SetNewPassword, '/resetpassword')
 api.add_resource(CollectCustomPageData, '/customdata')
 
 if __name__ == '__main__':
-    app.run(port=4000)
+    app.run(port=4000,debug=True)

@@ -8,6 +8,13 @@
 	<link rel="stylesheet" type="text/css" href="/static/styles/customstyles.css">
 	<link rel="stylesheet" type="text/css" href="/static/styles/tagstyles.css">
 	<link rel="stylesheet" type="text/css" href="/static/styles/navbar.css">
+	<script>
+		
+			if(document.cookie.split("=")[0]!="loggedIn"){
+				location.href="/login"
+			}
+			
+	</script>
 </head>
 <body>
 	<div class="bgimage">
