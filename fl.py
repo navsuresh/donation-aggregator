@@ -24,11 +24,11 @@ def test():
 
 @app.route('/follow_charity/<charity_id>',methods=['GET','POST'])
 def follow_charity(charity_id,user_id):
-	d1=db.users.user_id.find({followed_list:{in:[charity_id]}})
+	d1=db.users.user_id.find({followed_list:{$in:[charity_id]}})
 	if d1!=None:
 		return "Already following"
 	else:
-		db.users.update({user_id:int(user_id)},push:{followed_list:charity_id})
+		db.users.update({user_id:int(user_id)},$push:{followed_list:charity_id})
 
 if __name__ == '__main__':
     #app.secret_key = 'mysecret'
