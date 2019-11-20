@@ -10,7 +10,7 @@ import re
 mongoConn = pymongo.MongoClient("mongodb://localhost:27017/")
 
 db = mongoConn["charity_aggregator"]
-col = db["user_details"]
+mongo_user_details = db["user_details"]
 app = Flask(__name__)
 @app.after_request
 
@@ -23,7 +23,7 @@ api = Api(app)
 app.secret_key = "chartiyaggregator" 
 
 userStore = {}
-
+loggedIn = []
 linkReset = {}
 
 app.config['MAIL_SERVER']='smtp.gmail.com'
@@ -47,6 +47,7 @@ class SignupPage(Resource):
 class SendMail(Resource):
     def post(self):
         requestData = json.loads(request.get_data().decode("UTF-8"))
+        print(requestData)
         email = requestData["email"]
         code = random.randint(100000,999999)
         msg = Message('Confirm your Sign-up!', sender = 'charity.email.se@gmail.com', recipients = [email])
@@ -61,7 +62,7 @@ class SendMail(Resource):
 class VerifyOTP(Resource):
     def createUser(self,key):
         userStore[key]["_id"] = "USER"+str(random.randint(10000000,99999999))
-        insertDB = col.insert_one(userStore[key])
+        insertDB = mongo_user_details.insert_one(userStore[key])
         del userStore[key]
 
     def post(self):
@@ -80,10 +81,10 @@ class Login(Resource):
         jsonReq = json.loads(request.get_data().decode("UTF-8"))
         email = jsonReq["email"]
         password = jsonReq["password"]
-        row = col.find({"email":email}).limit(1)
+        row = mongo_user_details.find({"email":email}).limit(1)
         if row.count():
             if bcrypt.checkpw(password.encode("utf-8"), row[0]["password"]):
-                return "Logged In"
+                return "Logged In-"+str(row[0]["_id"])
         return "Wrong password"
 
 class ForgotPassword(Resource):
@@ -111,13 +112,15 @@ class SetNewPassword(Resource):
         url = json.loads(request.get_data().decode("UTF-8"))["url"]
         myquery = { "email": linkReset[url] }
         newvalues = { "$set": { "password": bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt()) } }
-        updateDB = col.update_one(myquery,newvalues)
+        updateDB = mongo_user_details.update_one(myquery,newvalues)
         del linkReset[url]
 
 class CollectCustomPageData(Resource):
     
     def post(self):
-        print(request.get_json(force=True))
+        pageData  = request.get_json(force=True)
+        if pageData["type"]=="event":
+            pass
     
     def get(self):
         print(request.args)
@@ -126,6 +129,7 @@ class CollectCustomPageData(Resource):
 class CustomProfilePage(Resource):
     
     def get(self):
+        print("cookies",request.cookies)
         return app.send_static_file('customize.html')
     
 class EventsPage(Resource):
@@ -133,7 +137,7 @@ class EventsPage(Resource):
     def get(self):
         return app.send_static_file('events.html')
 
-api.add_resource(LoginPage, '/')
+api.add_resource(LoginPage, '/login')
 api.add_resource(SignupPage, '/signup')
 api.add_resource(CustomProfilePage, '/profile')
 api.add_resource(EventsPage, '/events')
@@ -146,4 +150,4 @@ api.add_resource(SetNewPassword, '/resetpassword')
 api.add_resource(CollectCustomPageData, '/customdata')
 
 if __name__ == '__main__':
-    app.run(port=4000,debug=True)
+    app.run(port=4000)

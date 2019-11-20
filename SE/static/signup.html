@@ -1,14 +1,26 @@
 <html>
     <head>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Lato:900|Montserrat|Roboto&display=swap" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="/static/styles/corecss.css">
+        <link rel="stylesheet" type="text/css" href="/static/styles/navbar.css">
     </head>
     <body>
+        <div class="navbar">
+            <div class="left-bar">
+                <span><i class="material-icons">home</i><a href="#">Home</a></span>
+                <span><i class="material-icons">person</i><a href="http://localhost:4000/profile">Profile</a></span>
+			    <span><i class="material-icons">list_alt</i><a href="http://localhost:4000/events">Events</a></span>
+            </div>
+            <div class="right-bar">
+                <span><a href="#">Login</a></span>
+            </div>
+        </div>
         <div class="slideshow">
-            <img src="/static/wallpaper1.jpg" id="slide-image-0">
-            <img src="/static/wallpaper2.jpg" id="slide-image-1">
-            <img src="/static/wallpaper3.jpg" id="slide-image-2">
+            <img src="/static/images/wallpaper1.jpg" id="slide-image-0">
+            <img src="/static/images/wallpaper2.jpg" id="slide-image-1">
+            <img src="/static/images/wallpaper3.jpg" id="slide-image-2">
         </div>
         <div class="white-overlay">
 
@@ -118,7 +130,7 @@
                 $.ajax({
                     url:"/sendMail",
                     method:"POST",
-                    data:JSON.stringify({"email":currentEmail,"username":$("#charity-name").val(),"password":$("#user-password").val(),"handle":$("#handle").val(),"phNo":$("#ph-num").val(),"role":role}),
+                    data:JSON.stringify({"email":currentEmail,"username":$("#charity-name").val(),"password":$("#user-password").val(),"handle":$("#handle").val(),"phNo":$("#ph-num").val(),"role":role,"registered-events":[]}),
                     contentType: "application/json; charset=utf-8",
                     success:function(data){
                         console.log("Send")
@@ -168,6 +180,7 @@
                     success:function(data){
                         if(data==1){
                             alert("Account created")
+                            window.location.href = "http://localhost:4000/login"
                         }
                         else{
                             alert("Wrong OTP")

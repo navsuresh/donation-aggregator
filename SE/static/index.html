@@ -1,10 +1,22 @@
 <html>
     <head>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Lato:900|Montserrat|Roboto&display=swap" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="/static/styles/corecss.css">
+        <link rel="stylesheet" type="text/css" href="/static/styles/navbar.css">
     </head>
     <body>
+        <div class="navbar">
+            <div class="left-bar">
+                <span><i class="material-icons">home</i><a href="#">Home</a></span>
+                <span><i class="material-icons">person</i><a href="http://127.0.0.1:4000/profile">Profile</a></span>
+			    <span><i class="material-icons">list_alt</i><a href="javascript:redirect('events')">Events</a></span>
+            </div>
+            <div class="right-bar">
+                <span><a href="#">Login</a></span>
+            </div>
+        </div>
         <div class="slideshow">
             <img src="/static/images/wallpaper1.jpg" id="slide-image-0">
             <img src="/static/images/wallpaper2.jpg" id="slide-image-1">
@@ -13,7 +25,7 @@
         <div class="white-overlay">
 
         </div>
-
+        
         <div class="right-container">
             <div id="sign-up-for-users">
                 <div class="container-header">
@@ -99,7 +111,8 @@
                             "password":$("#user-password").val()
                         }),
                         success:function(data){
-                            alert(data)
+                            document.cookie = "loggedIn="+data.split("-")[1];
+                            alert(data.split("-")[0])
                         },
                         error:function(){
                             alert("An Error Occured. Please try again later.")
@@ -132,6 +145,9 @@
             $(document).ready( function() {
                 $("input[type='text'], textarea").attr('spellcheck',false);
             });
+
+
+
         </script>
     </body>
 </html>

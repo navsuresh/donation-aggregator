@@ -16,8 +16,8 @@
 	<div class="navbar">
 		<div class="left-bar">
 			<span><i class="material-icons">home</i><a href="#">Home</a></span>
-			<span><i class="material-icons">person</i><a href="/profile">Profile</a></span>
-			<span><i class="material-icons">list_alt</i><a href="/events">Events</a></span>
+			<span><i class="material-icons">person</i><a href="http://localhost:4000/profile">Profile</a></span>
+			<span><i class="material-icons">list_alt</i><a href="http://localhost:4000/events">Events</a></span>
 		</div>
 		<div class="right-bar">
 			<span><a href="#">Login</a></span>
@@ -33,7 +33,9 @@
             </div>
         </div>
         <h4 id="register-blurb">Get Registered soon!</h4> 
-        <div class="registerbutton">REGISTER</div>
+		<div class="registerbutton">REGISTER</div>
+		<br><br>
+		<input id="register-count" placeholder="Enter expected number of registrations">
 	</div>
 	<div class="registerwindow" id="register-2">
 		<div class="tagcontainer">
@@ -87,7 +89,7 @@
 				<div class="materials">
 					<i class="material-icons">date_range</i>
 					<br>
-					<input class="material-ip" id="event-date" value="12th February, 2020">
+					<input class="material-ip" type="datetime-local" id="event-date" value="12th February, 2020">
 				</div>
 				<div class="materials">
 					<i class="material-icons">phone</i>
@@ -212,14 +214,14 @@
                 if(componentToggle && widgetToggle){
                     $("#widget-menu-2").animate({"right":"0"},"fast")
                     $("#widget-menu-1").animate({"right":"-350"},"fast")
-					$(".registerwindow").animate({"right":"100px"},"fast")
+					$(".registerwindow").animate({"right":"80px"},"fast")
                     widgetToggle = false
                 }else{
                     if(componentToggle){
                         $("body").animate({"left":"-250px"},"fast")
-						$("#register-2").animate({"right":"100px"},"fast")
+						$("#register-2").animate({"right":"80px"},"fast")
                         $("#widget-menu-2").animate({"right":"0"},"fast")
-						$(".registerwindow").animate({"right":"100px"},"fast")
+						$(".registerwindow").animate({"right":"80px"},"fast")
                     }
                     else{
                         $("body").animate({"left":"0px"},"fast")
@@ -305,8 +307,8 @@
                     if(frameParent=='close'){
                         $("body").animate({"left":"0px"},"fast")
                         $("#widget-menu-1").animate({"right":"-350"},"fast")
-						$("#register-2").animate({"right":"100px"},"fast")
-						$(".registerwindow").animate({"right":"100px"},"fast")
+						$("#register-2").animate({"right":"80px"},"fast")
+						$(".registerwindow").animate({"right":"80px"},"fast")
                         widgetToggle = false
                     }
                     else{
@@ -394,6 +396,7 @@
 				var reader = new FileReader();
 				var pageData = {
 
+					"type":"event",
 					"foundation-name":$("#foundation-name").text(),
 					"event-title":$("#event-title").text(),
 					"event-head":$("#event-head").text(),
@@ -402,6 +405,7 @@
 					"event-date":$("#event-date").val(),
 					"phone-no":$("#phone-no").val(),
 					"contact-name":$("#contact-name").val(),
+					"expected-registration":$("#registration-count").val(),
 					"color":currentColor,
 					"widgets":[],
 					"tags":[]
@@ -450,6 +454,9 @@
 					$("#add-tag").hide()
 					$("#tag-container").hide()
 					$(".small-text").css({"animation":"none"})
+					$(".edit-mode").val("Edit Page")
+					$("#save-changes").text("Edit Page")
+					$("#register-count").hide()
 					saveData()
                 }
                 else{
@@ -466,6 +473,9 @@
 					$("#add-tag").show()
 					$("#tag-container").show()
 					$(".faqcontainer h3").css({"animation":"none"})
+					$(".edit-mode").val("Save Changes")
+					$("#save-changes").text("Save Changes")
+					$("#register-count").show()
                 }
 				
 				$("p[contenteditable] , h3[contenteditable],h4[contenteditable]").attr("contenteditable",editMode)
@@ -477,8 +487,10 @@
 			var currentColor = "#3e8e3e"
 
 			function colorChanger(ob){
+				
 				colorReplace(currentColor,ob.value)
 				currentColor = ob.value
+				
 			}
 			
 			function colorReplace(findHexColor, replaceWith) {
