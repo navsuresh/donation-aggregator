@@ -1,4 +1,4 @@
-from globals import *
+from modules.globals import *
 from flask import  request, Response, Blueprint, session
 from flask_restful import Resource, Api
 
@@ -30,10 +30,10 @@ class Unfollow(Resource):
             return "Not logged in.", 400
         """
         user_id = request.json["user_id"]
-        charity_id = request.json["charity_id"]
-        charity = db.follow_index.find_one({"charity_id": charity_id})
+        cid = request.json["cid"]
+        charity = db.follow_index.find_one({"cid": cid})
         if user_id in charity['followers']:
-            db.follow_index.update({"charity_id": charity_id}, {"$pull": {"followers": user_id}})
+            db.follow_index.update({"cid": cid}, {"$pull": {"followers": user_id}})
         return Response(status=200)
 
 

@@ -16,12 +16,12 @@
 	</script>
 </head>
 <body>
-
+	<span id="cid" style="display: none"></span>
 	<div class="navbar">
 		<div class="left-bar">
 			<span><i class="material-icons">home</i><a href="#">Home</a></span>
-			<span><i class="material-icons">person</i><a href="http://localhost:4000/profile">Profile</a></span>
-			<span><i class="material-icons">list_alt</i><a href="http://localhost:4000/events">Events</a></span>
+			<span><i class="material-icons">person</i><a href="http://localhost:5000/profile">Profile</a></span>
+			<span><i class="material-icons">list_alt</i><a href="http://localhost:5000/events">Events</a></span>
 		</div>
 		<div class="right-bar">
 			<span><a href="#">Login</a></span>
@@ -29,14 +29,16 @@
 	</div>
 	<div class="registerwindow" id="register-3">
 		<div class="tagcontainer">
-			<p id="save-changes">Edit Page</p>
-			<input class="edit-mode" id="save-input" type="button" onclick="toggleEditingMode()" value="Edit Page">
-			<p>Page color</p>
-			<input type="color" onchange="colorChanger(this)" value="#3e8e3e">
-			<p>Add Elements</p>
-			<button class="edit-mode" onclick="loadComponentMenu()">Add Elements</button>
-		</div>	
+				<p id="save-changes">Edit Page</p>
+				<input class="edit-mode registerbutton" id="save-input" type="button" onclick="toggleEditingMode()" value="Edit Page">
+				<p>Page color</p>
+				<input type="color" onchange="colorChanger(this)" value="#3e8e3e">
+		</div>
 	</div>
+	<div class="bgimage">
+		<img src="#" id="bgimage-img">
+	</div>
+	
 	<div class="centercontent">
 		<div class="contentbody">
 			<div class="contentcover">
@@ -49,7 +51,7 @@
 				</div>
 				<div class="follow-nav">
 					<div class="follower-count">
-						<h3 id="follow-count">1700</h3>
+						<h3 id="follow-count">0</h3>
 					</div>
 					<div class="follow">
 						<input id="follow-btn" type="button" value="Follow" onclick="increaseFol()">
@@ -160,6 +162,7 @@
 							<button class="del-btn" onclick="delImgRow(this)"> <i class="material-icons">close</i></button>
 						</div>
 					</div>
+					<button class="edit-mode registerbutton" id="add-component" onclick="addComponents(3)">Add</button>
 				</div>
 			</div>
 		</div>
@@ -181,21 +184,8 @@
 		</div>
 	</div>
 
-	<div class="widget-menu" id="widget-menu-2">
-		<div class="close-div" onclick="loadComponentMenu()">
-			<h3>Components</h3>
-			<i class="material-icons close-widget">close</i>
-		</div>
-		<div class="widgets" id="component-1" onclick="addComponents(1)">
-			
-		</div>
-		<div class="widgets" id="component-2" onclick="addComponents(2)">
-
-		</div>
-		<div class="widgets" id="component-3" onclick="addComponents(3)">
-
-		</div>
-	</div>
+		
+	
 
 	<script>
 
@@ -210,17 +200,17 @@
                 if(componentToggle && widgetToggle){
                     $("#widget-menu-2").animate({"right":"0"},"fast")
                     $("#widget-menu-1").animate({"right":"-350"},"fast")
-					$(".registerwindow").animate({"right":"100px"},"fast")
+					$(".registerwindow").animate({"right":"80px"},"fast")
                     widgetToggle = false
                 }else{
                     if(componentToggle){
                         $("body").animate({"left":"-250px"},"fast")
-						$(".registerwindow").animate({"right":"250px"},"fast")
+						$(".registerwindow").animate({"right":"330px"},"fast")
                         $("#widget-menu-2").animate({"right":"0"},"fast")
                     }
                     else{
                         $("body").animate({"left":"0px"},"fast")
-						$(".registerwindow").animate({"right":"100px"},"fast")
+						$(".registerwindow").animate({"right":"80px"},"fast")
                         $("#widget-menu-2").animate({"right":"-350"},"fast")
                     }
                     
@@ -241,6 +231,55 @@
 					$(this).html("Sample Text")
 				}
 			})
+
+			$("body").ready(function(){
+
+				//TODO
+				
+				/*$("body").css({"opacity":"0"})
+				$.ajax({
+					url:"callMalaikaFunction",
+					method:"post",
+					data:JSON.stringify({"eid":$("#eid").text()}),
+					success:function(data){
+						console.log("Received page data")
+						pageBuilder(data)
+					}
+				})*/
+				
+				
+			})
+
+			function getBase64Image(img) {
+				var canvas = document.createElement("canvas");
+				canvas.width = img.width;
+				canvas.height = img.height;
+				var ctx = canvas.getContext("2d");
+				ctx.drawImage(img, 0, 0);
+				var dataURL = canvas.toDataURL("image/png");
+				return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+			}
+
+			function pageBuilder(data){
+				var cookie = document.cookie.split("=")[1]
+				if(data["cid"]!=cookie){
+					$("#register-3").remove()
+				}
+				colorReplace(0,data["color"])
+				data["tags"].forEach((ind,ele)=>{
+					$(".tag-holder").append($("<p></p>").attr("class","tag").attr("id",ele).text(ele))
+				})
+				$("#foundation-name").text(data["foundation-name"])
+				$("#event-title").text(data["event-name"])
+				$("#event-head").text(data["event-head"])
+				$("#event-details").text(data["event-details"])
+				$("#location-name").text(data["location-name"])
+				$("#location-link").text(data["location-link"])
+				$("#event-date").text(data["event-date"])
+				$("#phone-no").text(data["phone-no"])
+				$("#contact-name").text(data["contact-name"])
+				$("body").css({"opacity":"1"})
+				}
 
             
             function callLoaders(){
@@ -276,6 +315,18 @@
                 }
             }
 
+			function increaseFol(){
+				$.ajax({
+					url:"/updatefollow",
+					method:"post",
+					data:JSON.stringify({"CharityID":$("#cid").text()}),
+					contentType:"application/json",
+					success:function(data){
+						$("#follow-count").text(parseInt($("#follow-count").text())+1)
+					}
+				})
+			}
+
             function loadImage(input) {
                 if (input.files && input.files[0]) {
                     var reader = new FileReader();
@@ -294,21 +345,21 @@
                 widgetToggle = true
                 if(componentToggle && widgetToggle){
                     $("#widget-menu-1").animate({"right":"0"},"fast")
-                    $("#widget-menu-2").animate({"right":"-350"},"fast")
+                    $("#widget-menu-2").animate({"right":"-330px"},"fast")
 					$(".registerwindow").animate({"right":"80px"},"fast")
                     componentToggle = false
                 }
                 else{
                     if(frameParent=='close'){
                         $("body").animate({"left":"0px"},"fast")
-                        $("#widget-menu-1").animate({"right":"-350"},"fast")
+                        $("#widget-menu-1").animate({"right":"-330px"},"fast")
 						$(".registerwindow").animate({"right":"80px"},"fast")
                         widgetToggle = false
                     }
                     else{
                         $("body").animate({"left":"-250px"},"fast")
                         $("#widget-menu-1").animate({"right":"0"},"fast")
-						$(".registerwindow").animate({"right":"350px"},"fast")
+						$(".registerwindow").animate({"right":"330px"},"fast")
                         widgetToggle = true
                         
                     }
@@ -316,6 +367,7 @@
                 }
                 selectedFrame = frameParent
             }
+
 
             function addWidget(path){
                 $($(selectedFrame).children()[1]).attr("src",path)
@@ -409,13 +461,37 @@
 												</div>`)
 												}
 						imageRows++
+						$(".event-desc").css({"animation":"0.6s shake","animation-iteration-count":"infinite"}).attr("contenteditable","true")
                         break;
                 }
             }
 
+			var totFollows = 0
+
+			$(document).ready(function(){
+				var data = document.cookie.split("=")[1]
+				$("#cid").text(data)
+				$.ajax({
+					url:"/updatefollow",
+					method:"get",
+					data:{"CharityID":$("#cid").text()},
+					contentType:"application/json",
+					success:function(data){
+						totFollows = parseInt(data)
+						currFollows = totFollows - 60
+						if(currFollows < 0){
+							currFollows = 0
+						}
+						$("#follow-count").text(currFollows)
+					}
+				})
+			})
+				
+			
+
             function followCount(){
                 $("#follow-count").text(parseInt($("#follow-count").text())+1)
-                if($("#follow-count").text()=="2000"){
+                if($("#follow-count").text()==totFollows){
                     clearInterval(followCounterInterval)
                 }
             }
@@ -461,7 +537,7 @@
 				pageData["type"] = "profile"
 
 				$.ajax({
-					url:"http://localhost:4000/customdata",
+					url:"http://localhost:5000/customdata",
 					async:true,
 					method:"post",
 					cache: false,
@@ -493,6 +569,7 @@
 					$(".small-text").css({"animation":"none"})
 					$("#save-changes").text("Edit Page")
 					$("#save-input").val("Edit Page")
+					$("#add-component").hide()
 					saveData()
                 }
                 else{
@@ -509,6 +586,9 @@
 					$(".del-btn").show()
 					$("#save-changes").text("Save Changes")
 					$("#save-input").val("Save Changes")
+					$($(".edit-mode")[0]).val("Save Changes")
+					$($(".save-changes")[0]).text("Save Changes")
+					$("#add-component").show()
                 }
 				
 				$("p[contenteditable] , h3[contenteditable],h4[contenteditable]").attr("contenteditable",editMode)

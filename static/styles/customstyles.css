@@ -21,15 +21,15 @@ h3{
     margin:0px;
 
 }
+#color-select{
+    width:192px;
+    margin-bottom:0px !important;
+}
 
 .edit-mode{
-    color:#3e8e3e !important;
-    padding:8px;
-    box-shadow: none;
-    background:none;
-    border:none;
-    border:1px solid #818181;
-    margin-bottom:20px;
+    width:200px !important;
+    margin-left:0px !important;
+    margin-bottom:15px !important;
 }
 
 .bgimage
@@ -235,6 +235,7 @@ iframe
 
 .about{
     color:#3e8e3e;
+    margin-bottom:20px;
 }
 
 .eventtitle
@@ -356,7 +357,7 @@ button,input[type="button"]{
     right:-350px;
     display: flex;
     top:60px;
-    width:350px;
+    width:300px;
     height:100%;
     background: #f2f2f2;
     flex-direction: column;
@@ -696,7 +697,6 @@ h1{
     font-size:15px;
     /*animation:shake 0.6s;*/
     /*animation-iteration-count:infinite;*/
-    margin-top:20px;
     margin-bottom:10px;
 }
 
@@ -743,7 +743,7 @@ button{
 .flex-col-box{
     display: flex;
     flex-direction: column;
-
+    margin-top:-20px;
 }
 
 .image-row{
@@ -1035,6 +1035,10 @@ div[contenteditable="true"]{
     border:1px solid rgba(0,0,0,0.1);
 }
 
+input{
+    outline: none;
+}
+
 #tag-add{
     font-size:16px;
     color:rgba(0,0,0,0.6);
@@ -1044,6 +1048,7 @@ div[contenteditable="true"]{
 
 .tag-box{
     position: relative;
+    display: none;
 }
 
 #tag-container{
@@ -1207,4 +1212,107 @@ input[type="color"]{
     background: none;
     border:1px solid rgba(0,0,0,0.4);
     display: none;
+}
+
+.question-modal{
+    position: absolute;
+    top:0px;
+    left:0px;
+    right:0px;
+    bottom:0px;
+    background:rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    height:0px;
+    z-index:800;
+}
+
+.question-box{
+    max-height:35%;
+    width:40%;
+    display: none;
+    background: white;
+    position: fixed;
+    margin:10px;
+    overflow-y: scroll;
+    padding:20px;
+    margin-top:100px;
+}
+
+.questions{
+    background:#f2f2f2;
+    padding:20px;
+    margin:15px 20px;
+}
+
+.questions h4{
+    margin-bottom:15px;
+}
+
+.upper-nav{
+    top:0px;
+    left:0px;
+    right:0px;
+    height:40px;
+    display: flex;
+    justify-content: space-between;
+    padding:10px 20px;
+}
+
+.upper-nav h1{
+    margin:0px;
+}
+
+.answer-q{
+    width:98%;
+    border:none;
+    border:1px solid rgba(0,0,0,0.2);
+    padding:5px;
+}
+
+.close-q{
+    color:black;
+    padding-top:10px;
+    padding-right:10px;
+    cursor: pointer;
+}
+
+.answer-button{
+    margin-top:10px;
+    padding:6px;
+    border-radius: 5px;
+    border:none;
+    background:#3e8e3e;
+    color:white;
+    box-shadow: none;
+}
+
+.subscribe-flex{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#subscribe-override{
+    flex:1 !important;
+}
+
+#subscribe-button{
+    padding:8px;
+    background:#3e8e3e;
+    border:none;
+    color:white;
+}
+
+#add-component{
+    margin-left:33% !important;
+    display: none;
+}
+
+input[type="button"],button{
+    border:none;
+}
+
+input[type="color"]{
+    cursor: pointer;
 }
