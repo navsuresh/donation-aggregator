@@ -317,7 +317,7 @@
 
 			function increaseFol(){
 				$.ajax({
-					url:"/updatefollow",
+					url:"http://localhost:5000/updatefollow",
 					method:"post",
 					data:JSON.stringify({"CharityID":$("#cid").text()}),
 					contentType:"application/json",
@@ -472,7 +472,7 @@
 				var data = document.cookie.split("=")[1]
 				$("#cid").text(data)
 				$.ajax({
-					url:"/updatefollow",
+					url:"http://localhost:5000/updatefollow",
 					method:"get",
 					data:{"CharityID":$("#cid").text()},
 					contentType:"application/json",
@@ -490,10 +490,14 @@
 			
 
             function followCount(){
-                $("#follow-count").text(parseInt($("#follow-count").text())+1)
+                
                 if($("#follow-count").text()==totFollows){
                     clearInterval(followCounterInterval)
                 }
+				else{
+					$("#follow-count").text(parseInt($("#follow-count").text())+1)
+				}	
+				
             }
 
 

@@ -106,7 +106,7 @@ class ForgotPassword(Resource):
         email = requestData["email"]
         linkReset[url] = email
         msg = Message('Reset password', sender='charity.email.se@gmail.com', recipients=[email])
-        msg.body = "Click this URL to reset your password " + "http://localhost:4000/validatepassword/" + url
+        msg.body = "Click this URL to reset your password " + "http://localhost:5000/validatepassword/" + url
         mail.send(msg)
         return "Sent"
 

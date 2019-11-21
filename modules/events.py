@@ -20,12 +20,12 @@ class CreateEvent(Resource):
             if(session["logged_in_as"]!="charity"): # not logged in as a charity
                 return "The cid does not match logged_in id.",400
         '''
-        slot_count = globals.db.events.find_one({"doc_type": "common"})["slot_count"]   # doc_type common used for getting common data for the collection
+        #slot_count = globals.db.events.find_one({"doc_type": "common"})["slot_count"]   # doc_type common used for getting common data for the collection
         data = request.get_json()
         data["eid"] = str(uuid1())
         data["cid"] = cid
         data["participants"] = []
-        data["slots"] = ["_empty" for _ in range(slot_count)]  # Initialise placeholders for allowable widgets
+        data["slots"] = ["_empty" for _ in range(3)]  # Initialise placeholders for allowable widgets
         globals.db.events.insert(data)
         search_engine.update_index(data)
         response = jsonify({"eid": data["eid"]})
@@ -36,6 +36,7 @@ class CreateEvent(Resource):
 class ViewEvent(Resource):
     def get(self, eid):
         """Return a single event"""
+        print("here",eid)
         event = globals.db.events.find_one({"eid": eid})
         del event['_id']
         response = jsonify(event)

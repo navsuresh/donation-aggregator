@@ -45,7 +45,7 @@
         <h4 id="register-blurb">Click here to register!</h4> 
 		<div class="registerbutton" onclick="registerForEvent()">REGISTER</div>
 		<br><br>
-		<input id="register-count" placeholder="Enter expected number of registrations">
+		<input id="registration-count" placeholder="Enter expected number of registrations">
 	</div>
 	<div class="registerwindow" id="register-2">
 		<div class="tagcontainer">
@@ -97,22 +97,22 @@
 				<div class="materials">
 					<i class="material-icons" >my_location</i>
 					<br>
-					<input class="material-ip" id="location-name" value="Cubbon Park, Bangalore 560011">
+					<input class="material-ip locked-input" id="location-name" value="Cubbon Park, Bangalore 560011">
 				</div>
 				<div class="materials">
 					<i class="material-icons">date_range</i>
 					<br>
-					<input class="material-ip" type="datetime-local" id="event-date" value="12th February, 2020">
+					<input class="material-ip locked-input" type="datetime-local" id="event-date" value="12th February, 2020">
 				</div>
 				<div class="materials">
 					<i class="material-icons">phone</i>
 					<br>
-					<input class="material-ip" id="phone-no" value="+91 987654321">
+					<input class="material-ip locked-input" id="phone-no" value="+91 987654321">
 				</div>
 				<div class="materials">
 					<i class="material-icons">person</i>
 					<br>
-					<input class="material-ip" id="contact-name" value="Coordinator">
+					<input class="material-ip locked-input" id="contact-name" value="Coordinator">
 				</div>
 			</div>
 			<div class="contentbox">
@@ -208,6 +208,7 @@
             var selectedFrame = null
             var editMode = false
 			var imageRows = 3
+			var currentColor = "#3e8e3e"
             function loadComponentMenu(){
                 componentToggle = !componentToggle
                 if(componentToggle && widgetToggle){
@@ -264,7 +265,7 @@
 			function pageBuilder(data){
 
 				var cookie = document.cookie.split("=")[1]
-				console.log(cookie,data["cid"])
+				console.log(data)
 				if(data["cid"]!=cookie){
 					$("#register-2").remove()
 				}
@@ -272,6 +273,7 @@
 				data["tags"].forEach((ind,ele)=>{
 					$(".tag-holder").append($("<p></p>").attr("class","tag").attr("id",ele).text(ele))
 				})
+
 				$("#foundation-name").text(data["foundation-name"])
 				$("#event-title").text(data["event-name"])
 				$("#event-head").text(data["event-head"])
@@ -281,8 +283,13 @@
 				$("#event-date").val(data["event-date"])
 				$("#phone-no").val(data["phone-no"])
 				$("#contact-name").val(data["contact-name"])
-				colorReplace(currentColor,data["color"])
 				$("#color-select").val(data["color"])
+
+				$("#denominator").text(data["registration-count"])
+				$("#registration-count").val(data["registration-count"])
+				loadCoverFromBase64(data["cover-picture"])
+				getAnsweredFAQ()
+				colorReplace(currentColor,data["color"])
 				$("body").css({"opacity":"1"})
 			}
 			
@@ -330,6 +337,14 @@
                     reader.readAsDataURL(input.files[0]);
                 }
             }
+
+			function loadCoverFromBase64(enc){
+				$("#cover-picture").attr('src', "data:image/png;base64,"+enc);
+				$("#cover-picture").show()
+				$(".unloaded-cover-picture").css({"opacity":"0"})
+				$("#bgimage-img").attr("src","data:image/png;base64,"+enc)
+				$("body").css({"background":"none"})
+			}
 
             function loadImage(input) {
                 if (input.files && input.files[0]) {
@@ -446,7 +461,7 @@
 				data.forEach((ele)=>{
 					console.log(ele)
 					$(".question-box").append($(`<div class="questions">
-						<h4>`+ele["Query"]+`</h4>
+						<h4 class="question-q">`+ele["Query"]+`</h4>
 						<input class="answer-q" placeholder="Enter your answer">
 						<input type="button" class="answer-button" onclick="answerQuestion(this)"" value="Answer">
 					</div>`).attr("id",ele["FaqID"]))
@@ -488,7 +503,17 @@
 					data:JSON.stringify({"Answer":$($(ob).parent().find(".answer-q")).val(),"CharityID":$("#cid").text(),"EventID":$("#eid").text(),"FaqID":parseInt($(ob).parent().attr("id"))}),
 					contentType:"application/json",
 					success:function(data){
-						build
+						
+						$(`<div class="faq">
+							<div class="question">
+								`+$($(ob).parent().find(".question-q")).text()+`
+							</div>
+							<div class="answer">
+							`+$($(ob).parent().find(".answer-q")).val()+`
+							</div>
+						</div>`).insertBefore(".faq-ask")
+						$($(ob).parent()).remove()
+						
 					}
 				})
 			}
@@ -526,12 +551,12 @@
 					"event-title":$("#event-title").text(),
 					"event-head":$("#event-head").text(),
 					"event-details":$("#event-details").text(),
-					"location-name":$("#location-id").val(),
-					"location-link":$("#location-id").val(),
+					"location-name":$("#location-name").val(),
+					"location-link":$("#location-link").val(),
 					"event-date":$("#event-date").val(),
 					"phone-no":$("#phone-no").val(),
 					"contact-name":$("#contact-name").val(),
-					"expected-registration":$("#registration-count").val(),
+					"registration-count":$("#registration-count").val(),
 					"color":currentColor,
 					"widgets":[],
 					"tags":[]
@@ -597,7 +622,7 @@
 					$(".small-text").css({"animation":"none"})
 					$($(".edit-mode")[0]).val("Edit Page")
 					$($(".save-changes")[0]).text("Edit Page")
-					$("#register-count").hide()
+					$("#registration-count").hide()
 					saveData()
                 }
                 else{
@@ -616,7 +641,7 @@
 					$(".faqcontainer h3").css({"animation":"none"})
 					$($(".edit-mode")[0]).val("Save Changes")
 					$($(".save-changes")[0]).text("Save Changes")
-					$("#register-count").show()
+					$("#registration-count").show()
                 }
 				
 				$("p[contenteditable] , h3[contenteditable],h4[contenteditable]").attr("contenteditable",editMode)
@@ -625,7 +650,7 @@
             followCounterInterval = setInterval(followCount,1)
 
 
-			var currentColor = "#3e8e3e"
+			
 
 			function colorChanger(ob,onrender=false){
 				if(onrender==false){
@@ -635,12 +660,15 @@
 				else{
 					colorReplace(currentColor,onrender)
 					currentColor = onrender
-				}
-				
-				
+				}				
+			}
+
+			function greenReplace(){
+				colorReplace("#3e8e3e",currentColor)
 			}
 			
 			function colorReplace(findHexColor, replaceWith) {
+				console.log(findHexColor,replaceWith)
 				function rgb2hex(rgb) {
 					if (/^#[0-9A-F]{6}$/i.test(rgb)) return rgb;
 					rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
