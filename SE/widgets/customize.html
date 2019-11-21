@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Lato:900|Montserrat|Roboto&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/static/corecss.css">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+        <style>
+            body{
+                display: flex;
+                justify-content: center;
+                position: relative;
+                padding:0px;
+                margin:0px;
+                font-family: 'Roboto', sans-serif;
+                color:rgba(0,0,0,0.8);
+                
+            }
+
+            input{
+                font-family: 'Roboto', sans-serif;
+            }
+
+            h1,h2,h3,h4{
+                font-family:"Montserrat", sans-serif;
+            }
+
+            .page-container{
+                height:100%;
+                background:whitesmoke;
+                padding:40px;
+                width:50%;
+            }
+            
+            .cover-picture{
+                height:300px;
+                margin:-40px;
+                margin-bottom:0px;
+                position: relative;
+                border-bottom:1px solid rgba(0,0,0,0.3);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            textarea{
+                width:100%;
+                resize: vertical;
+                border:none;
+                font-size:16px;
+                padding:20px;
+                box-sizing: border-box;
+            }
+
+            iframe{
+                width:250px;
+                height:250px;
+                border: none;
+                background:white;
+            }
+
+            .flex-row-box{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            .page-container div{
+                margin-bottom:40px;
+            }
+
+            .small-text{
+                height:100px;
+                margin-bottom:60px;
+            }
+
+            .large-text{
+                height:200px;
+            }
+
+            #edit-btn{
+                position: absolute;
+                right:0px;
+            }
+
+            .edit-box{
+                position: relative;
+                height:20px;
+            }
+
+            .widget-menu{
+                position: fixed;
+                right:-350px;
+                display: flex;
+                top:0px;
+                width:350px;
+                height:100%;
+                background: black;
+                flex-direction: column;
+                align-items: center;
+                overflow-y:scroll;
+
+            }
+
+            .widgets{
+                height:250px;
+                width:250px;
+                background:white;
+                flex-shrink: 0;
+                margin-top:40px;
+                position: relative;
+                cursor: pointer;
+                transition:0.3s ease all;
+            }
+
+            .widgets:hover{
+                filter:brightness(60%);
+            }
+
+            .follow-nav{
+                position: relative;
+            }
+
+            .follow{
+                right:60px;
+                position: absolute;
+                top:100px;
+                z-index: 10;    
+            }
+
+            #follow-btn{
+                width:100px;
+            }
+
+            .follower-count{
+                position: absolute;
+                z-index:3;
+                background:rgba(0,0,0,0.3);
+                color:white;
+                width:100px;
+                height:100px;
+                right:60px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size:20px;
+            }
+
+            .frame-box{
+                height:250px;
+                width:250px;
+                position: relative;
+            }
+
+            .frame-button{
+                position: absolute;
+                top:0px;
+                left:0px;
+                right:0px;
+                height:240px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border:5px solid rgba(0,0,0,0.3);
+                margin:0px;
+                cursor: pointer;
+                transition:0.5s ease all;
+            }
+
+            .frame-button i{
+                cursor: pointer;
+                font-size:35px;
+                color:rgba(0,0,0,0.3);
+                transition:0.5s ease all;
+            }
+
+            .frame-button i:hover{
+                color:rgba(0,0,0,0.6);
+            }
+
+            .frame-button:hover{
+                border:5px solid rgba(0,0,0,0.6);
+            }
+
+            .footer{
+                border-top:1px solid black;
+                margin:-40px;
+                padding:40px;
+            }
+
+            .card-container{
+                position: relative;
+                z-index:3;
+                background:white;
+                height:360px;
+                width:250px;
+                border:1px solid rgba(0,0,0,0.3);
+            }
+
+            .text-container{
+                position: relative;
+                left:0px;
+                right:0px;
+                top:300px;
+                z-index:4;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .h2-container{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                margin-top:20px;
+            }
+
+            .del-btn{
+                text-align: center;
+            }
+
+            .h2-input{
+                padding:10px;
+                width:80%;
+            }
+
+            .img-container-unloaded{
+                position: absolute;
+                top:0px;
+                left:0px;
+                right:0px;
+                height:290px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border:5px solid rgba(0,0,0,0.3);
+                margin:0px;
+                cursor: pointer;
+                transition:0.5s ease all;
+                z-index: 4;
+            }
+
+            .img-container-unloaded i{
+                cursor: pointer;
+                font-size:35px;
+                color:rgba(0,0,0,0.3);
+                transition:0.5s ease all;
+            }
+
+            .img-container-loaded{
+                position: absolute;
+                top:0px;
+                left:0px;
+                right:0px;
+                height:290px;
+                display: none;
+                overflow: hidden;
+                z-index: 3;
+            }
+
+            .p-input{
+                margin-top:20px;
+            }
+
+            .img-container-unloaded i:hover{
+                color:rgba(0,0,0,0.6);
+            }
+
+            .img-container-unloaded:hover{
+                border:5px solid rgba(0,0,0,0.6);
+            }
+
+            input[ type="file"] {
+                position: absolute;
+                font-size:22px;
+                opacity: 0;
+                outline:none;
+                cursor: pointer;
+                height:300px;
+            }
+
+            #close-widget{
+                color:white;
+                font-size:24px;
+                cursor: pointer;
+                float:right;
+                margin:20px;
+            }
+
+            #close-div{
+                margin:0px 20px 0px 20px;
+                margin-bottom:-20px;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                width:100%;
+            }
+
+            #close-div h4{
+                margin:0px;
+                color:white;
+                margin-left:20px;
+            }
+
+            i{
+                color:rgba(0,0,0,0.6);
+            }
+
+            .element-div{
+                border:1px solid transparent;
+            }
+
+            input[type="button"],button{
+                cursor: pointer;
+            }
+
+            .unloaded-cover-picture{
+                position: absolute;
+                top:0px;
+                left:0px;
+                right:0px;
+                height:290px;
+                border:5px solid rgba(0,0,0,0.3);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index:3;
+                background:white;
+            }
+
+            .unloaded-cover-picture i{
+                cursor: pointer;
+                font-size:35px;
+                color:rgba(0,0,0,0.3);
+                transition:0.5s ease all;
+            }
+
+            .unloaded-cover-picture input{
+                position: absolute;
+                top:0px;
+                left:0px;
+                right:0px;
+                width:100%;
+                height:290px;
+                cursor: pointer;
+                
+            }
+
+            .loaded-cover-picture{
+                position: absolute;
+                overflow: hidden;
+                z-index:2;
+                height:300px;
+                top:0px;
+                left:0px;
+                right:0px;
+                width:100%;
+            }
+
+        </style>
+    </head>
+    <body onload="callLoaders()">
+        <div class="page-container">
+            <div class="cover-picture">
+                <div class="unloaded-cover-picture">
+                    <i class="fa fa-plus"></i>
+                    <input type="file" onchange="loadCoverPic(this)">
+                </div>
+                <div class="loaded-cover-picture">
+                    <img src="#">
+                </div>
+                <div class="follow-nav">
+                    <div class="follower-count">
+                        <h2 id="follow-count">1700</h2>
+                    </div>
+                    <div class="follow">
+                        <input id="follow-btn" type="button" value="Follow" onclick="increaseFol()">
+                    </div>
+                </div>
+            </div>
+            <div class="edit-box">
+                <button id="edit-btn" onclick="loadComponentMenu()">Add Elements</button>
+                <button id="edit-mode" onclick="toggleEditingMode()">Save Changes</button>
+            </div>
+            <div class="header">
+                <h2 class="about">About us</h2>
+                <textarea style="margin-bottom:20px;" class="small-text" placeholder="About us"></textarea>
+            </div>
+            <div class="element-div">
+                <div class="h2-container">
+                    <input class="h2-input" id="about" value="Our Events">
+                    <button class="delElement(this)" onclick="delElement(this)"> <i class="fa fa-close"></i></button>
+                </div>
+                <div class="flex-row-box">
+                    <div class="frame-box" onclick="loadWidgetMenu(this)">
+                        <div class="frame-button">
+                            <i class="fa fa-plus"></i>
+                        </div>
+                        <iframe></iframe>
+                    </div>
+                    <div class="frame-box" onclick="loadWidgetMenu(this)">
+                        <div class="frame-button">
+                            <i class="fa fa-plus"></i>
+                        </div>
+                        <iframe></iframe>
+                    </div>
+                    <div class="frame-box" onclick="loadWidgetMenu(this)">
+                        <div class="frame-button">
+                            <i class="fa fa-plus"></i>
+                        </div>
+                        <iframe></iframe>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="element-div">
+                <div class="h2-container">
+                    <input class="h2-input" id="about" value="Our Events">
+                    <button class="del-btn" onclick="delElement(this)"> <i class="fa fa-close" ></i></button>
+                </div>
+                <div class="flex-row-box">
+                    <div class="card-container">
+                        <div class="img-container-unloaded">
+                            <i class="fa fa-plus"></i>
+                            <input  type="file" accept="image/*"  onchange="loadImage(this)"  size="100">
+                        </div>
+                        <div class="img-container-loaded">
+                            <img class="card-img" src="#">
+                        </div>
+                        <div class="text-container">
+                            <input class="p-input text-input" value="Sample text">
+                        </div>
+                    </div>
+                    <div class="card-container">
+                        <div class="img-container-unloaded">
+                            <i class="fa fa-plus"></i>
+                            <input  type="file" accept="image/*"  onchange="loadImage(this)"  size="100">
+                        </div>
+                        <div class="img-container-loaded">
+                            <img class="card-img" src="#">
+                        </div>
+                        <div class="text-container">
+                            <input class="p-input text-input" value="Sample text">
+                        </div>
+                    </div>
+                    <div class="card-container">
+                        <div class="img-container-unloaded">
+                            <i class="fa fa-plus"></i>
+                            <input  type="file" accept="image/*"  onchange="loadImage(this)"  size="100">
+                        </div>
+                        <div class="img-container-loaded">
+                            <img class="card-img" src="#">
+                        </div>
+                        <div class="text-container">
+                            <input class="p-input text-input" value="Sample text">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="widget-menu" id="widget-menu-1">
+            <div id="close-div" onclick="loadWidgetMenu('close')">
+                <h4>Widgets</h4>
+                <i id="close-widget" class="fa fa-close"></i>
+            </div>
+            <div class="widgets" id="widget-1" onclick="addWidget('calendar.html')">
+
+            </div>
+            <div class="widgets" id="widget-2" onclick="addWidget('tagsys.html')">
+
+            </div>
+            <div class="widgets" id="widget-3">
+
+            </div>
+            <div class="widgets" id="widget-4">
+
+            </div>
+            <div class="widgets" id="widget-5">
+
+            </div>
+            <div class="widgets" id="widget-6">
+
+            </div>
+        </div>
+
+        <div class="widget-menu" id="widget-menu-2">
+            <div id="close-div" onclick="loadComponentMenu()">
+                <h4>Components</h4>
+                <i id="close-widget" class="fa fa-close"></i>
+            </div>
+            <div class="widgets" id="component-1" onclick="addComponents(1)">
+                
+            </div>
+            <div class="widgets" id="component-2" onclick="addComponents(2)">
+
+            </div>
+            <div class="widgets" id="component-3" onclick="addComponents(3)">
+
+            </div>
+            <div class="widgets" id="component-4">
+
+            </div>
+            <div class="widgets" id="component-5">
+
+            </div>
+            <div class="widgets" id="component-6">
+
+            </div>
+        </div>
+        
+        <script>
+            var componentToggle = false
+            var widgetToggle = false
+            var selectedFrame = null
+            var editMode = true
+            function loadComponentMenu(){
+                componentToggle = !componentToggle
+                if(componentToggle && widgetToggle){
+                    $("#widget-menu-2").animate({"right":"0"},"fast")
+                    $("#widget-menu-1").animate({"right":"-350"},"fast")
+                    widgetToggle = false
+                }else{
+                    if(componentToggle){
+                        $("body").animate({"left":"-250px"},"fast")
+                        $("#widget-menu-2").animate({"right":"0"},"fast")
+                    }
+                    else{
+                        $("body").animate({"left":"0px"},"fast")
+                        $("#widget-menu-2").animate({"right":"-350"},"fast")
+                    }
+                    
+                }
+                
+            
+            }
+            
+            function callLoaders(){
+                followCount()
+            }
+
+            function delElement(ref){
+                $(ref).parent().parent().slideUp(350,function(){
+                    $(this).remove()
+                })
+
+            }
+
+            function loadCoverPic(input){
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $($(input).parent().parent().children(".loaded-cover-picture").children()[0]).attr('src', e.target.result);
+                        $(input).parent().parent().children(".loaded-cover-picture").show()
+                        $(input).parent().css({"opacity":"0"})
+                    };
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            function loadImage(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $($(input).parent().parent().children(".img-container-loaded").children()[0]).attr('src', e.target.result);
+                        $(input).parent().parent().children(".img-container-loaded").show()
+                        $(input).parent().css({"opacity":"0"})
+                    };
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+            
+            function loadWidgetMenu(frameParent){
+                widgetToggle = true
+                if(componentToggle && widgetToggle){
+                    $("#widget-menu-1").animate({"right":"0"},"fast")
+                    $("#widget-menu-2").animate({"right":"-350"},"fast")
+                    componentToggle = false
+                }
+                else{
+                    if(frameParent=='close'){
+                        $("body").animate({"left":"0px"},"fast")
+                        $("#widget-menu-1").animate({"right":"-350"},"fast")
+                        widgetToggle = false
+                    }
+                    else{
+                        $("body").animate({"left":"-250px"},"fast")
+                        $("#widget-menu-1").animate({"right":"0"},"fast")
+                        widgetToggle = true
+                        
+                    }
+
+                }
+                selectedFrame = frameParent
+            }
+
+            function addWidget(path){
+                $($(selectedFrame).children()[1]).attr("src",path)
+                $($(selectedFrame).children()[0]).hide()
+            }
+
+            function addComponents(no){
+                switch(no){
+                    case 1:
+                        $(".page-container").append(`<div class="element-div">
+                                <div class="h2-container">
+                                <input class="h2-input about" value="Our Events">
+                                <button class="del-btn" onclick="delElement(this)"> <i class="fa fa-close"></i></button>
+                            </div>
+                            <textarea class="small-text" placeholder="About us"></textarea>
+                            </div></div>`);
+                        break;
+                    case 2:
+                        $(".page-container").append(`<div class="h2-container">
+                                                        <input class="h2-input about" value="Our Events">
+                                                        <button class="delElement(this)" onclick="delElement(this)"> <i class="fa fa-close"></i></button>
+                                                        </div>
+                                                        <div class="flex-row-box">
+                                                            <div class="frame-box" onclick="loadWidgetMenu(this)">
+                                                                <div class="frame-button">
+                                                                    <i class="fa fa-plus"></i>
+                                                                </div>
+                                                                <iframe></iframe>
+                                                            </div>
+                                                            <div class="frame-box" onclick="loadWidgetMenu(this)">
+                                                                <div class="frame-button">
+                                                                    <i class="fa fa-plus"></i>
+                                                                </div>
+                                                                <iframe></iframe>
+                                                            </div>
+                                                            <div class="frame-box" onclick="loadWidgetMenu(this)">
+                                                                <div class="frame-button">
+                                                                    <i class="fa fa-plus"></i>
+                                                                </div>
+                                                                <iframe></iframe>
+                                                            </div>
+                                                    </div>`)
+                        break;
+                    case 3:
+                    $(".page-container").append(`<div class="element-div">
+                                                    <div class="h2-container">
+                                                        <input class="h2-input about" value="Our Events">
+                                                        <button class="del-btn" onclick="delElement(this)"> <i class="fa fa-close"></i></button>
+                                                    </div>
+                                                    <div class="flex-row-box">
+                                                        <div class="card-container">
+                                                            <div class="img-container-unloaded">
+                                                                <i class="fa fa-plus"></i>
+                                                                <input  type="file" accept="image/*"  onchange="loadImage(this)"  size="100">
+                                                            </div>
+                                                            <div class="img-container-loaded">
+                                                                <img class="card-img" src="#">
+                                                            </div>
+                                                            <div class="text-container">
+                                                                <input class="p-input text-input" value="Sample text">
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-container">
+                                                            <div class="img-container-unloaded">
+                                                                <i class="fa fa-plus"></i>
+                                                                <input  type="file" accept="image/*"  onchange="loadImage(this)"  size="100">
+                                                            </div>
+                                                            <div class="img-container-loaded">
+                                                                <img class="card-img" src="#">
+                                                            </div>
+                                                            <div class="text-container">
+                                                                <input class="p-input text-input" value="Sample text">
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-container">
+                                                            <div class="img-container-unloaded">
+                                                                <i class="fa fa-plus"></i>
+                                                                <input  type="file" accept="image/*"  onchange="loadImage(this)"  size="100">
+                                                            </div>
+                                                            <div class="img-container-loaded">
+                                                                <img class="card-img" src="#">
+                                                            </div>
+                                                            <div class="text-container">
+                                                                <input class="p-input text-input" value="Sample text">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>`)
+                        break;
+                }
+            }
+
+            function followCount(){
+                $("#follow-count").text(parseInt($("#follow-count").text())+1)
+                if($("#follow-count").text()=="2000"){
+                    clearInterval(followCounterInterval)
+                }
+            }
+
+
+            function toggleEditingMode(){
+                
+
+                if(editMode){
+                    $(".h2-input").each((index,element)=>{
+                        $(element).replaceWith("<h2 class='h2-p about'>" + element.value + "</h2>")
+                    })
+
+                    $(".text-input").each((index,element)=>{
+                        $(element).replaceWith("<p class='text-p'>" + element.value + "</p>")
+                    })
+
+                    $("textarea").each((index,element)=>{
+                        $(element).replaceWith("<p class='textarea-p'>" + element.value + "</p>")
+                    })
+
+                    $("#edit-mode").text("Edit Content")
+
+                    editMode = false
+                }
+                else{
+                    $(".h2-p").each((index,element)=>{
+                        $(element).replaceWith("<input class='h2-input'  value='"+element.textContent+"'>")
+                    })
+
+                    $(".text-p").each((index,element)=>{
+                        $(element).replaceWith("<input class='text-input p-input' value='"+element.textContent+"'>")
+                    })
+
+                    $(".textarea-p").each((index,element)=>{
+                        $(element).replaceWith("<textarea class='small-text' placeholder='About us' value='"+element.textContent+"' </textarea>")
+                    })
+
+                    $("#edit-mode").text("Save Changes")
+
+                    editMode = true
+                }
+            }
+
+            followCounterInterval = setInterval(followCount,1)
+
+        </script>
+    </body>
+</html>

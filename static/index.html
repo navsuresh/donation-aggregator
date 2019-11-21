@@ -1,0 +1,153 @@
+<html>
+    <head>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Lato:900|Montserrat|Roboto&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/static/styles/corecss.css">
+        <link rel="stylesheet" type="text/css" href="/static/styles/navbar.css">
+    </head>
+    <body>
+        <div class="navbar">
+            <div class="left-bar">
+                <span><i class="material-icons">home</i><a href="#">Home</a></span>
+                <span><i class="material-icons">person</i><a href="http://127.0.0.1:5000/profile">Profile</a></span>
+			    <span><i class="material-icons">list_alt</i><a href="http://127.0.0.1:5000/events">Events</a></span>
+            </div>
+            <div class="right-bar">
+                <span><a href="#">Login</a></span>
+            </div>
+        </div>
+        <div class="slideshow">
+            <img src="/static/images/wallpaper1.jpg" id="slide-image-0">
+            <img src="/static/images/wallpaper2.jpg" id="slide-image-1">
+            <img src="/static/images/wallpaper3.jpg" id="slide-image-2">
+        </div>
+        <div class="white-overlay">
+
+        </div>
+        
+        <div class="right-container">
+            <div id="sign-up-for-users">
+                <div class="container-header">
+                    <h2> Login </h2>
+                    <!--<input value="Click for user login" type="button" id="user-select" onclick="selectUser(this.id)"><input value="Click for charity login"  type="button" id="charity-select" onclick="selectUser(this.id)">-->
+                </div>
+                <div class="container-body">
+                        <p>Email</p>
+                        <input type="email" class="signup-input" id="email-id">
+                        <p>Password</p>
+                        <input type="password" class="signup-input" id="user-password">
+                        <a onclick="forgotPassword()" class="forgot-a">Forgot password? </a>
+                        <div class="container-footer">
+                            <br><br>
+                            <input type="submit" class="login-btn" onclick="loginService('user')" value="Login">
+                            <br>
+                            <a href="signup" id="sign-up-a">Don't have an account? Click here to sign up! </a>
+                        </div> 
+                </div>
+                
+            </div>
+        </div>
+
+        <script>
+            var currentWallpaper = 0
+            var nextWallpaper
+            function setBackground(){
+                nextWallpaper = (currentWallpaper+1)%3
+                $("#slide-image-"+nextWallpaper).css({"z-index":"2"}).fadeIn(2500,function(){
+                    $("#slide-image-"+nextWallpaper).css({"z-index":"1"})
+                    $("#slide-image-"+currentWallpaper).css({"z-index":"0"}).hide()
+                    currentWallpaper = nextWallpaper
+                })
+                
+                
+                
+            }
+            setInterval(setBackground,8000)
+
+            function selectUser(selectedId){
+                
+                /*  Description:
+                 *  Swaps out the visibility of whichever container is selected.
+                 *  If the user login is selected, the charity login is hidden and vice-versa.
+                 */
+                
+                /*  Tips:
+                 *  .show() -> display:block; .hide() -> display:none
+                 *  === used to check type and value for safety
+                 */
+                
+                
+                if(selectedId==="user-select"){
+                    $("#login-up-for-users").show()
+                    $("#sign-up-for-charity").hide()
+                    
+                }
+                else{
+                    $("#login-up-for-users").hide()
+                    $("#sign-up-for-charity").show()
+                }
+            }
+        
+            function loginService(entity){
+                
+                /*  Description
+                 *  Makes AJAX requests to verify login credentials.
+                 */
+                
+                
+                /*  TODO:
+                 *  Success and Error functions require custom messages, whether they are alerts or special text.
+                 *  Decide the parameters for both user and charity login, and decide if each deserves a separate request
+                 */
+                
+                
+
+                $.ajax({
+                        method:"POST",
+                        url:"http://localhost:5000/login/senddata",
+                        data:JSON.stringify({
+                            "email":$("#email-id").val(),
+                            "password":$("#user-password").val()
+                        }),
+                        success:function(data){
+                            document.cookie = "loggedIn="+data.split("-")[1];
+                            alert(data.split("-")[0])
+                        },
+                        error:function(){
+                            alert("An Error Occured. Please try again later.")
+                        }
+                })
+                
+                
+            }
+
+            function forgotPassword(){
+                if($("#email-id").val()==""){
+                    alert("Enter email and then click")
+                    return
+                }
+                $.ajax({
+                        method:"POST",
+                        url:"http://localhost:5000/passwordreset",
+                        data:JSON.stringify({
+                            "email":$("#email-id").val()
+                        }),
+                        success:function(data){
+                            alert(data)
+                        },
+                        error:function(){
+                            alert("An Error Occured. Please try again later.")
+                        }
+                })
+            }
+
+            $(document).ready( function() {
+                $("input[type='text'], textarea").attr('spellcheck',false);
+            });
+
+
+
+        </script>
+    </body>
+</html>
