@@ -15,15 +15,16 @@ def push_notification(message, cid):
 
 class PushNotifications(Resource):
     def post(self, cid):
-        data = request.get_json()  # {"message-header": "mhead", "message-body": "mbody", "timestamp":"tstamp"}
+        data = request.get_json()  # {"foundation-name": "", "content":"", "date":"" }
         data['foundation-name'] = globals.db.charity_details.find_one({"cid": cid})['username']
+        data['type'] = 'update'
         push_notification(data, cid)
         return Response(status=200)
 
 
 class GetNotifications(Resource):
-    def get(self, uid):
-        inbox = list(globals.db.inbox.find_one({"uid": uid}))
+    def get(self):
+        inbox = list(globals.db.inbox.find_one({"uid": session['uid']}))
         for message in inbox:
             del message['_id']
         response = jsonify(inbox)
@@ -31,5 +32,11 @@ class GetNotifications(Resource):
         return response
 
 
+class Inbox(Resource):
+    def get(self):
+        return globals.app.send_static_file('inbox.html')
+
+
 api.add_resource(PushNotifications, '/<cid>/push_notification')
-api.add_resource(GetNotifications, '/<uid>/get_notifications')
+api.add_resource(GetNotifications, '/get_notifications')
+api.add_resource(Inbox, '/inbox')

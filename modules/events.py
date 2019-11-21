@@ -1,8 +1,9 @@
 from modules import globals
 from uuid import uuid1
-from flask import request, jsonify, Response, session, Blueprint
+from flask import request, jsonify, Response, session, Blueprint, render_template
 from flask_restful import Resource, Api
 from modules.search import Search
+from modules.notification import push_notification
 
 
 api_bp = Blueprint('api_events', __name__)
@@ -28,6 +29,8 @@ class CreateEvent(Resource):
         data["slots"] = ["_empty" for _ in range(3)]  # Initialise placeholders for allowable widgets
         globals.db.events.insert(data)
         search_engine.update_index(data)
+        data["type"]="eventlistings"
+        push_notification(data, cid)
         response = jsonify({"eid": data["eid"]})
         response.status_code = 201
         return response
@@ -36,7 +39,7 @@ class CreateEvent(Resource):
 class ViewEvent(Resource):
     def get(self, eid):
         """Return a single event"""
-        print("here",eid)
+        print(type(eid), eid)
         event = globals.db.events.find_one({"eid": eid})
         del event['_id']
         response = jsonify(event)
@@ -127,6 +130,50 @@ class EventsPage(Resource):
     def get(self, eventid):
         return globals.app.send_static_file('events.html')
 
+
+# update a slot
+class UpdateWidget(Resource):
+    def post(self, eid):
+        # un-comment when session is implemented
+        """
+            if(session["logged_in"]==False): # not logged in
+                return "Not logged in.",400
+            if(session["logged_in_as"]!="charity"): # not logged in as a charity
+                return "You do not have permission to update this page.",400
+        """
+        event = globals.db.events.find_one({"eid": eid})
+        if event is None:
+            return "Invalid Event", 200
+        """
+        if event["cid"] != session["cid"]:
+            return "The cid does not match logged_in id.", 400
+        """
+
+        slots = eval(request.data) # expecting json format (Ex - '[src1, src2, src3]')
+        myquery = {"eid": eid}
+        newvalues = {"$set": {"slots": slots}} # updating slots to the new value
+        globals.db.events.update_one(myquery, newvalues)
+
+        return "updated", 200
+
+# recieve a slot
+class GetWidget(Resource):
+    def post(self, eid):
+        event = globals.db.events.find_one({"eid": eid})
+        if event is None:
+            return "Invalid Event", 200
+
+        slots = globals.db.events.find_one({"eid": eid})["widgets"]
+        return jsonify(slots)
+
+
+class Calendar(Resource):
+    def get(self):
+        return globals.app.send_static_file('calendar.html')
+
+
+api.add_resource(UpdateWidget, '/<eid>/update-widget')
+api.add_resource(GetWidget, '/<eid>/get-widget')
 api.add_resource(CreateEvent, '/<cid>/create-event')
 api.add_resource(ViewEvent, '/<eid>/view-event')
 api.add_resource(ViewAllEvents, '/list-events')
@@ -136,6 +183,7 @@ api.add_resource(UpdateEvent, '/<eid>/update-event')
 api.add_resource(Search, '/search/<query>')
 api.add_resource(Event, '/event-listings')
 api.add_resource(EventsPage, '/events/<eventid>')
+api.add_resource(Calendar, '/calendar')
 
 #
 # if __name__ == '__main__':
