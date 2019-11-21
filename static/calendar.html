@@ -2,7 +2,6 @@
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Lato:900|Montserrat|Roboto&display=swap" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="/styles/corecss.css">
 
         <style>
 
@@ -11,13 +10,13 @@
                 color:rgba(0,0,0,0.8);
                 margin:0px;
                 padding:0px;
-
             }
 
             table{
-                width:200px;
+                width:300px;
                 font-size:12px;
-                height:200px;
+                height:300px;
+                
             }
 
             table,tr,td,th{
@@ -31,6 +30,7 @@
 
             td{
                 font-family: 'Roboto', sans-serif;
+                pointer-events: none;
             }
 
             table{
@@ -64,10 +64,7 @@
                 color:white !important;
             }
 
-            #event-row{
-                height:40px;
-                border-top:1px solid rgba(0,0,0,0.3);
-            }
+
 
 
         </style>
@@ -172,7 +169,6 @@
                     tr.append(td)
                 }
                 table.append(tr)
-                table.append($("<tr></tr>").attr("id","event-row").append($("<td></td>").attr("colspan","7").attr("id","event-cell").text("")))
 
                 $("body").append(table)
             }

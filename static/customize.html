@@ -21,7 +21,8 @@
 		<div class="left-bar">
 			<span><i class="material-icons">home</i><a href="#">Home</a></span>
 			<span><i class="material-icons">person</i><a href="http://localhost:5000/profile">Profile</a></span>
-			<span><i class="material-icons">list_alt</i><a href="http://localhost:5000/events">Events</a></span>
+			<span><i class="material-icons">list_alt</i><a href="http://localhost:5000/events/0000">Create Event</a></span>
+			<span><i class="material-icons">list_alt</i><a href="http://localhost:5000/event-listings">All Events</a></span>
 		</div>
 		<div class="right-bar">
 			<span><a href="#">Login</a></span>
@@ -61,7 +62,7 @@
 			
 			<div class="contentbox overridegrid content-border">
 				<div class="eventorganizer">
-					<h3 id="foundation-name">Ninaada Foundation</h3>
+					<h3 id="foundation-name" >Ninaada Foundation</h3>
 				</div>
 				<div class="eventlocation">
 					<i class="material-icons">my_location</i>
@@ -74,7 +75,7 @@
 						<h3 class="about"  contenteditable="false" spellcheck="false"> Our Events</h3>
 						<button  onclick="delElement(this)"> <i class="material-icons">close</i></button>
 					</div>
-					<p class="small-text" contenteditable="false" spellcheck="false">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+					<p class="small-text" id="about-us" contenteditable="false" spellcheck="false">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
 				</div>
 			</div>
 			<div class="contentbox">
@@ -87,19 +88,13 @@
 							<div class="frame-button">
 								<i class="material-icons">add</i>
 							</div>
-							<iframe></iframe>
+							<iframe class="custom-widget" src=""></iframe>
 						</div>
 						<div class="frame-box" onclick="loadWidgetMenu(this)">
 							<div class="frame-button">
 								<i class="material-icons">add</i>
 							</div>
-							<iframe></iframe>
-						</div>
-						<div class="frame-box" onclick="loadWidgetMenu(this)">
-							<div class="frame-button">
-								<i class="material-icons">add</i>
-							</div>
-							<iframe></iframe>
+							<iframe class="custom-widget" src=""></iframe>
 						</div>
 					</div>
 				</div>
@@ -107,62 +102,12 @@
 			<div class="contentbox">
 				<div class="element-div">
 					<div class="h3-container">
-						<h3 class="about"  contenteditable="false" spellcheck="false"> Our Events</h3>
+						<h3 class="about"  contenteditable="false" spellcheck="false"> Past Events</h3>
 						<button  onclick="delImgRow(this)	"> <i class="material-icons">close</i></button>
 					</div>
 					<div class="flex-col-box">
-						<div class="image-row image-row-odd">
-							<div class="event-box">
-								<div class="img-container-unloaded">
-									<i class="material-icons">add</i>
-									<input class='translateImage' type="file" accept="image/*"  onchange="loadImage(this)"  size="100">
-								</div>
-								<div class="img-container-loaded">
-									<img class="card-img" src="#">
-								</div>
-							</div>
-							<div class="text-box">
-								<h4 class="event-desc" contenteditable="false" spellcheck="false">Sample Header</h4>
-								<p class="event-desc" contenteditable="false" spellcheck="false">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
-							</div>
-							<button class="del-btn" onclick="delImgRow(this)"> <i class="material-icons">close</i></button>
-						</div>
-
-						<div class="image-row image-row-even">
-							<div class="text-box">
-								<h4 class="event-desc" contenteditable="false" spellcheck="false">Sample Header</h4>
-								<p class="event-desc" contenteditable="false" spellcheck="false">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
-							</div>
-							<div class="event-box">
-								<div class="img-container-unloaded">
-									<i class="material-icons">add</i>
-									<input class='translateImage' type="file" accept="image/*"  onchange="loadImage(this)"  size="100">
-								</div>
-								<div class="img-container-loaded">
-									<img class="card-img" src="#">
-								</div>
-							</div>
-							<button class="del-btn" onclick="delImgRow(this)"> <i class="material-icons">close</i></button>
-						</div>
-
-						<div class="image-row image-row-even">
-							<div class="event-box">
-								<div class="img-container-unloaded">
-									<i class="material-icons">add</i>
-									<input class='translateImage' type="file" accept="image/*"  onchange="loadImage(this)"  size="100">
-								</div>
-								<div class="img-container-loaded">
-									<img class="card-img" src="#">
-								</div>
-							</div>
-							<div class="text-box">
-								<h4 class="event-desc" contenteditable="false" spellcheck="false">Sample Header</h4>
-								<p class="event-desc" contenteditable="false" spellcheck="false">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
-							</div>
-							<button class="del-btn" onclick="delImgRow(this)"> <i class="material-icons">close</i></button>
-						</div>
+						
 					</div>
-					<button class="edit-mode registerbutton" id="add-component" onclick="addComponents(3)">Add</button>
 				</div>
 			</div>
 		</div>
@@ -173,14 +118,11 @@
 			<h3>Widgets</h3>
 			<i class="material-icons close-widget">close</i>
 		</div>
-		<div class="widgets" id="widget-1" onclick="addWidget('calendar.html')">
-
+		<div class="widgets" id="widget-1" onclick="addWidget('calendar')">
+			<h3>Calendar</h3>
 		</div>
-		<div src="tagsys.html"  class="widgets" id="widget-2" onclick="addWidget('tagsys.html')">
-
-		</div>
-		<div class="widgets" id="widget-3">
-
+		<div class="widgets" id="widget-1" onclick="addWidget('quote')">
+			<h3>Quotes</h3>
 		</div>
 	</div>
 
@@ -194,7 +136,8 @@
             var widgetToggle = false
             var selectedFrame = null
             var editMode = false
-			var imageRows = 3
+			var imageRows = 0
+			var currentColor = "#3e8e3e"
             function loadComponentMenu(){
                 componentToggle = !componentToggle
                 if(componentToggle && widgetToggle){
@@ -317,7 +260,7 @@
 
 			function increaseFol(){
 				$.ajax({
-					url:"http://localhost:5000/updatefollow",
+					url:"http://localhost:5000/followers",
 					method:"post",
 					data:JSON.stringify({"CharityID":$("#cid").text()}),
 					contentType:"application/json",
@@ -370,101 +313,11 @@
 
 
             function addWidget(path){
-                $($(selectedFrame).children()[1]).attr("src",path)
+                $($(selectedFrame).children()[1]).attr("src","http://localhost:5000/1234/"+path)
                 $($(selectedFrame).children()[0]).hide()
             }
 
-            function addComponents(no){
-                switch(no){
-                    case 1:
-                        $(".contentbody").append(`<div class="contentbox">
-													<div class="element-div text-blocks">
-														<div class="h3-container">
-															<h3 class="about"  contenteditable="false" spellcheck="false"> Our Events</h3>
-															<button  onclick="delElement(this)"> <i class="material-icons">close</i></button>
-														</div>
-														<p class="small-text" contenteditable="false" spellcheck="false"></p>
-													</div>
-												</div>`);
-                        break;
-                    case 2:
-                        $(".contentbody").append(`<div class="contentbox">
-													<div class="element-div">
-														<div class="h3-container">
-															<h3 class="about"  contenteditable="false"> Our Events</h3>
-															<button  onclick="delElement(this)"> <i class="material-icons">close</i></button>
-														</div>
-														<div class="flex-row-box">
-															<div class="frame-box" onclick="loadWidgetMenu(this)">
-																<div class="frame-button">
-																	<i class="material-icons">add</i>
-																</div>
-																<iframe></iframe>
-															</div>
-															<div class="frame-box" onclick="loadWidgetMenu(this)">
-																<div class="frame-button">
-																	<i class="material-icons">add</i>
-																</div>
-																<iframe></iframe>
-															</div>
-															<div class="frame-box" onclick="loadWidgetMenu(this)">
-																<div class="frame-button">
-																	<i class="material-icons">add</i>
-																</div>
-																<iframe></iframe>
-															</div>
-														</div>
-													</div>
-												</div>`)
-												
-                        break;
-                    case 3:
-					
-                    if(imageRows%2==0)
-					{
-						console.log("here1",imageRows)
-                        $(".flex-col-box").append(`<div class="image-row image-row-odd">
-													<div class="event-box">
-														<div class="img-container-unloaded">
-															<i class="material-icons">add</i>
-															<input class='translateImage' type="file" accept="image/*"  onchange="loadImage(this)"  size="100">
-														</div>
-														<div class="img-container-loaded">
-															<img class="card-img" src="#">
-														</div>
-													</div>
-													<div class="text-box">
-														<h4 class="event-desc" contenteditable="false" spellcheck="false">Sample Header</h4>
-														<p class="event-desc" contenteditable="false" spellcheck="false">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
-													</div>
-													<button class="del-btn" onclick="delImgRow(this)"> <i class="material-icons">close</i></button>
-												</div>`)
-					}
-						
-												else{
-													console.log("here2",imageRows)
-						$(".flex-col-box").append(`<div class="image-row image-row-even">
-													<div class="text-box">
-														<h4 class="event-desc" contenteditable="false" spellcheck="false">Sample Header</h4>
-														<p class="event-desc" contenteditable="false" spellcheck="false">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
-													</div>
-													<div class="event-box">
-														<div class="img-container-unloaded">
-															<i class="material-icons">add</i>
-															<input class='translateImage' type="file" accept="image/*"  onchange="loadImage(this)"  size="100">
-														</div>
-														<div class="img-container-loaded">
-															<img class="card-img" src="#">
-														</div>
-													</div>
-													<button class="del-btn" onclick="delImgRow(this)"> <i class="material-icons">close</i></button>
-												</div>`)
-												}
-						imageRows++
-						$(".event-desc").css({"animation":"0.6s shake","animation-iteration-count":"infinite"}).attr("contenteditable","true")
-                        break;
-                }
-            }
+        
 
 			var totFollows = 0
 
@@ -472,7 +325,7 @@
 				var data = document.cookie.split("=")[1]
 				$("#cid").text(data)
 				$.ajax({
-					url:"http://localhost:5000/updatefollow",
+					url:"/followers",
 					method:"get",
 					data:{"CharityID":$("#cid").text()},
 					contentType:"application/json",
@@ -483,14 +336,87 @@
 							currFollows = 0
 						}
 						$("#follow-count").text(currFollows)
+						followCounterInterval = setInterval(followCount,20)
 					}
 				})
 			})
 				
-			
+			$("body").ready(function(){
+				
+				var cid = window.location.href.split("/")[window.location.href.split("/").length-1]
+				if(cid!="0000"){
+					$("body").css({"opacity":"0"})
+					$.ajax({
+						url:"http://localhost:5000/list-events",
+						success:function(data){
+							data.forEach((ele)=>{
+								buildPrevEvents('data:image/png;base64,'+ele["cover-picture"],ele["event-details"],ele["event-head"])
+							})
+						}
+					})
+					$.ajax({
+						url:"http://localhost:5000/charitydata/"+cid,
+						method:"post",
+						dataType:"json",
+						success:function(data){
+							buildPage(data)
+						}
+					})
+				}
+				
+			})
+
+			function buildPage(data){
+				console.log(data)
+				$("#location-id").val(data["location-id"])
+				$("#foundation-name").text(data["foundation-name"])
+				var wid = $(".custom-widget");
+				wid.each((ind, element)=>{
+					$(element).attr("src", data["widgets"][ind])
+					$($(element).parent().find(".frame-button")).hide()
+				})
+				colorChanger("#3e8e3e",data["color"])
+				$("#about-us").text(data["about-us"])
+				$("body").css({"opacity":"1"})
+			}
+
+			function buildPrevEvents(img,dets,title){
+				if(imageRows%2==0)
+					{
+						console.log("here1",imageRows)
+                        $(".flex-col-box").append(`<div class="image-row image-row-odd">
+													<div class="event-box">
+														<div class="img-container-loaded">
+															<img class="card-img" src="`+img+`">
+														</div>
+													</div>
+													<div class="text-box">
+														<h4 class="event-desc" contenteditable="false" spellcheck="false">`+title+`</h4>
+														<p class="event-desc" contenteditable="false" spellcheck="false">`+dets+`</p>
+													</div>
+													<button class="del-btn" onclick="delImgRow(this)"> <i class="material-icons">close</i></button>
+												</div>`)
+					}
+						
+												else{
+													console.log("here2",imageRows)
+						$(".flex-col-box").append(`<div class="image-row image-row-even">
+													<div class="text-box">
+														<h4 class="event-desc" contenteditable="false" spellcheck="false">`+title+`</h4>
+														<p class="event-desc" contenteditable="false" spellcheck="false">`+dets+`</p>
+													</div>
+													<div class="event-box">
+														<div class="img-container-loaded">
+															<img class="card-img" src="`+img+`">
+														</div>
+													</div>
+													<button class="del-btn" onclick="delImgRow(this)"> <i class="material-icons">close</i></button>
+												</div>`)
+												}
+						imageRows++
+			}
 
             function followCount(){
-                
                 if($("#follow-count").text()==totFollows){
                     clearInterval(followCounterInterval)
                 }
@@ -507,41 +433,23 @@
 				var eventsRows = $(".image-row")
 				var reader = new FileReader();
 				var pageData = {
-
+					"cid":document.cookie.split("=")[1],
 					"location-id":$("#location-id").val(),
 					"foundation-name":$("#foundation-name").text(),
-					"past-events":[],
 					"widgets":[],
-					"text-blocks":[],
-					"color":currentColor
+					"color":currentColor,
+					"about-us":$("#about-us").text()
 				}
 
-
-				eventsRows.each(function(ind,element){
-					pageData["past-events"].push({
-						"event-number":ind,
-						"event-header":$(element).children().find("h4").text(),
-						"event-about":$(element).children().find("p").text(),
-						//"image":$(element).children().find(".translate-image")[0].files[0]
-					})
-					
+				var wid = $(".custom-widget");
+				wid.each((ind, element)=>{
+					pageData["widgets"].push($(element).attr('src'))
 				})
 
-				var textBlocks = $(".text-blocks")
-
-				textBlocks.each(function(ind,element){
-					pageData["text-blocks"].push({
-						"text-number":ind,
-						"text-header":$(element).children().find("h3").text(),
-						"text-about":$(element).children().find("p").text()
-					})
-					
-				})
-				
-				pageData["type"] = "profile"
+				console.log(pageData)
 
 				$.ajax({
-					url:"http://localhost:5000/customdata",
+					url:"http://localhost:5000/customdata/"+document.cookie.split("=")[1],
 					async:true,
 					method:"post",
 					cache: false,
@@ -561,31 +469,30 @@
 
                 if(editMode){
                     editMode = false
+					$("#foundation-name").attr("contenteditable","false")
 					$(".material-ip").css({"animation":"none"}).addClass("locked-input")
 					$("#edit-btn").hide()
 					$(".h3-container button").hide()
 					$(".frame-box").css({"pointer-events":"none"})
 					$("input[type='file']").css({"pointer-events":"none"})
 					$(".del-btn").hide()
-					$(".about").css({"animation":"none","border":"none"})
-					$(".event-desc").css({"animation":"none"})
 					$(".eventlocation").css({"animation":"none"})
 					$(".small-text").css({"animation":"none"})
 					$("#save-changes").text("Edit Page")
 					$("#save-input").val("Edit Page")
 					$("#add-component").hide()
+					$(".frame-button").hide()
 					saveData()
                 }
                 else{
                     editMode = true
+					$("#foundation-name").attr("contenteditable","true")
 					$(".small-text").css({"animation":"0.6s shake","animation-iteration-count":"infinite"})
 					$(".material-ip").css({"animation":"0.6s shake","animation-iteration-count":"infinite"}).removeClass("locked-input")
 					$("#edit-btn").show()
 					$(".h3-container button").show()
 					$(".frame-box").css({"pointer-events":"auto"})
 					$("input[type='file']").css({"pointer-events":"auto"})
-					$(".event-desc").css({"animation":"0.6s shake","animation-iteration-count":"infinite"})
-					$(".about").css({"animation":"0.6s shake","animation-iteration-count":"infinite"})
 					$(".eventlocation").css({"animation":"0.6s shake","animation-iteration-count":"infinite"})
 					$(".del-btn").show()
 					$("#save-changes").text("Save Changes")
@@ -593,18 +500,25 @@
 					$($(".edit-mode")[0]).val("Save Changes")
 					$($(".save-changes")[0]).text("Save Changes")
 					$("#add-component").show()
+					$(".frame-button").show()
                 }
 				
 				$("p[contenteditable] , h3[contenteditable],h4[contenteditable]").attr("contenteditable",editMode)
             }
 
-            followCounterInterval = setInterval(followCount,1)
+            
 
-			var currentColor = "#3e8e3e"
+			
 
-			function colorChanger(ob){
-				colorReplace(currentColor,ob.value)
-				currentColor = ob.value
+			function colorChanger(ob,onrender=false){
+				if(onrender==false){
+					colorReplace(currentColor,ob.value)
+					currentColor = ob.value
+				}
+				else{
+					colorReplace(currentColor,onrender)
+					currentColor = onrender
+				}				
 			}
 			
 			function colorReplace(findHexColor, replaceWith) {

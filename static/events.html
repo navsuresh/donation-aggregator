@@ -19,12 +19,14 @@
 <body>
 	<span id="eid" style="display:none"></span>
 	<span id="cid" style="display: none"></span>
-
+	<span id="uid" style="display: none"></span>
+	
 	<div class="navbar">
 		<div class="left-bar">
 			<span><i class="material-icons">home</i><a href="#">Home</a></span>
 			<span><i class="material-icons">person</i><a href="http://localhost:5000/profile">Profile</a></span>
-			<span><i class="material-icons">list_alt</i><a href="http://localhost:5000/events">Events</a></span>
+			<span><i class="material-icons">list_alt</i><a href="http://localhost:5000/events/0000">Create Event</a></span>
+			<span><i class="material-icons">list_alt</i><a href="http://localhost:5000/event-listings">All Events</a></span>
 		</div>
 		<div class="right-bar">
 			<span><a href="#">Login</a></span>
@@ -75,14 +77,16 @@
 					<div class="tag-holder">
 
 					</div>
-					<p class="tag" id="add-tag" onclick="displayTagSearch()">Add tag<i id="tag-add" class="material-icons">add</i></p>
-					<div id="tag-container">
-						<div id="search-tags">
-							<input spellcheck=false id="choose-tag" placeholder="Search tag" onfocus="getTagsList()" onkeyup="getTagsList()">
-							<div id="tag-suggestions">
-			
+					<div class="filter-tag">
+						<p class="tag" id="add-tag" onclick="displayTagSearch()">Add tag<i id="tag-add" class="material-icons">add</i></p>
+							<div id="tag-container">
+								<div id="search-tags">
+									<input spellcheck=false id="choose-tag" placeholder="Search tag" onfocus="getTagsList()" onkeyup="getTagsList()">
+									<div id="tag-suggestions">
+					
+									</div>
+								</div>
 							</div>
-						</div>
 					</div>
                 </div>
             </div>
@@ -141,12 +145,6 @@
 							</div>
 							<iframe class="custom-widget" src=""></iframe>
 						</div>
-						<div class="frame-box" onclick="loadWidgetMenu(this)">
-							<div class="frame-button">
-								<i class="material-icons">add</i>
-							</div>
-							<iframe class="custom-widget" src=""></iframe>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -175,14 +173,11 @@
 			<h3>Widgets</h3>
 			<i class="material-icons close-widget">close</i>
 		</div>
-		<div class="widgets" id="widget-1" onclick="addWidget('calendar.html')">
-
+		<div class="widgets" id="widget-1" onclick="addWidget('calendar')">
+			<h3>Calendar</h3>
 		</div>
-		<div src="tagsys.html"  class="widgets" id="widget-2" onclick="addWidget('tagsys.html')">
-
-		</div>
-		<div class="widgets" id="widget-3">
-
+		<div class="widgets" id="widget-1" onclick="addWidget('quote')">
+			<h3>Quotes</h3>
 		</div>
 	</div>
 
@@ -240,9 +235,9 @@
 
 				var eid = window.location.href.split("/")[window.location.href.split("/").length-1]
 				$("#eid").text(eid)
-
 				var data = document.cookie.split("=")[1]
 				$("#cid").text(data)
+				$("#uid").text(data)
 				if(window.location.href.split("/")[window.location.href.split("/").length-1]!="0000"){
 					mode="update"
 					$("body").css({"opacity":"0"})
@@ -270,8 +265,12 @@
 					$("#register-2").remove()
 				}
 				colorReplace(0,data["color"])
-				data["tags"].forEach((ind,ele)=>{
-					$(".tag-holder").append($("<p></p>").attr("class","tag").attr("id",ele).text(ele))
+				data["tags"].forEach((ele,ind)=>{
+					$(".tag-holder").append($("<p></p>").css({"background":currentColor}).attr("class","tag").attr("id",ele).text(ele+"   "+"x").click(function(){
+						tagArray.push($(this).text().split(" ")[0])
+						$(this).remove()
+						tagCount--
+					}))
 				})
 
 				$("#foundation-name").text(data["foundation-name"])
@@ -283,16 +282,14 @@
 				$("#event-date").val(data["event-date"])
 				$("#phone-no").val(data["phone-no"])
 				$("#contact-name").val(data["contact-name"])
-<<<<<<< HEAD
-=======
 				colorReplace(currentColor,data["color"])
 
 				var wid = $(".custom-widget");
 				wid.each((ind, element)=>{
 					$(element).attr("src", data["widgets"][ind])
+					$($(element).parent().find(".frame-button")).hide()
 				})
 
->>>>>>> 397a4f5287d8a5873791699f619e7695cd2bdc41
 				$("#color-select").val(data["color"])
 
 				$("#denominator").text(data["registration-count"])
@@ -329,6 +326,16 @@
 			function delImgRow(ob){
 				$(ob).parent().slideUp(function(){
 					$(ob).parent().remove()
+				})
+			}
+
+			function subscribe(){
+				$.ajax({
+					url:"http://localhost:5000/"+$("#uid").text()+"/follow",
+					method:"post",
+					success:function(data){
+						console.log("Subscribed")
+					}
 				})
 			}
 
@@ -399,7 +406,7 @@
             }
 
             function addWidget(path){
-                $($(selectedFrame).children()[1]).attr("src","http://localhost:5000/calendar")
+                $($(selectedFrame).children()[1]).attr("src","http://localhost:5000/"+$("#eid").text()+"/"+path)
                 $($(selectedFrame).children()[0]).hide()
             }
 
@@ -631,11 +638,12 @@
 					$(".about").css({"border":"none","animation":"none"})
 					$("div[contenteditable='true']").css({"animation":"none"}).attr("contenteditable","false")
 					$("#add-tag").hide()
-					$(".tag-box").hide()
+					$(".filter-tag").hide()
 					$(".small-text").css({"animation":"none"})
 					$($(".edit-mode")[0]).val("Edit Page")
 					$($(".save-changes")[0]).text("Edit Page")
 					$("#registration-count").hide()
+					$(".frame-button").hide()
 					saveData()
                 }
                 else{
@@ -650,11 +658,12 @@
 					$(".about").css({"animation":"0.6s shake","animation-iteration-count":"infinite","border":"1px solid rbga(0,0,0,0.1)"})
 					$("div[contenteditable='false']").css({"animation":"0.6s shake","animation-iteration-count":"infinite"}).attr("contenteditable","true")
 					$("#add-tag").show()
-					$(".tag-box").show()
+					$(".filter-tag").show()
 					$(".faqcontainer h3").css({"animation":"none"})
 					$($(".edit-mode")[0]).val("Save Changes")
 					$($(".save-changes")[0]).text("Save Changes")
 					$("#registration-count").show()
+					$(".frame-button").show()
                 }
 				
 				$("p[contenteditable] , h3[contenteditable],h4[contenteditable]").attr("contenteditable",editMode)

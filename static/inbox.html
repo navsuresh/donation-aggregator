@@ -2,8 +2,8 @@
 <html>
 <head>
 	<title>Donation Aggregator Service</title>
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="/static/styles/navbar.css">
 	<style type="text/css">
 		html
 		{
@@ -545,20 +545,15 @@
 <body onscroll="bgchange(event);">
 	<div class="bgimage"></div>
 
-	<div class="topdock">
-		<div class="centertopbar">	
-			<div class="menuitem" style="background-color: white;">
-				<i class="material-icons" style="color: #77dd77">stars</i>
-				<span>INBOX</span>
-			</div>
-			<div class="menuitem">
-				<i class="material-icons">event</i>
-				<span>EVENTS</span>
-			</div>
-			<div class="menuitem">
-				<i class="material-icons">person</i>
-				<span>PROFILE</span>
-			</div>
+	<div class="navbar">
+		<div class="left-bar">
+			<span><i class="material-icons">home</i><a href="#">Home</a></span>
+			<span><i class="material-icons">person</i><a href="http://localhost:5000/profile">Profile</a></span>
+			<span><i class="material-icons">list_alt</i><a href="http://localhost:5000/events/0000">Create Event</a></span>
+			<span><i class="material-icons">list_alt</i><a href="http://localhost:5000/event-listings">All Events</a></span>
+		</div>
+		<div class="right-bar">
+			<span><a href="#">Login</a></span>
 		</div>
 	</div>
 	<div class="searchbubble">
@@ -587,6 +582,8 @@
 			clearTimeout(a);
 			a=setTimeout(sendSearch,1500);
 		}
+
+
 
 		function sendSearch()
 		{
