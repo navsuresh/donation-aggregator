@@ -12,6 +12,4 @@ class CustomProfilePage(Resource):
         return globals.app.send_static_file('customize.html')
 
 
-
-
 api.add_resource(CustomProfilePage, '/profile')

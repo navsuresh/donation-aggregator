@@ -9,7 +9,7 @@ events = db["events"]
 meta = {"slot_count": 5, "widget_count": 10, "doc_type": "common"}
 events.insert(meta)
 
-event = {"cid": 1, "eid" : "1",
+event = {"cid": "1", "eid" : "1",
          "foundation-name": "Ninaada Foundation",
          "event-title": "Dog Pet Fest",
          "date": "Tue Sep 17 2019 18:35:55 GMT+0530 (IST)",
@@ -25,7 +25,7 @@ event = {"cid": 1, "eid" : "1",
 
 events.insert(event)
 
-event = {"cid": 1, "eid" : "2",
+event = {"cid": "1", "eid" : "2",
          "foundation-name": "Ninaada Foundation",
          "expected-registration": 100,
          "event-title": "Soup Kitchen",
@@ -42,7 +42,7 @@ event = {"cid": 1, "eid" : "2",
 
 events.insert(event)
 
-event = {"cid": 2, "eid": "3",
+event = {"cid": "2", "eid": "3",
          "foundation-name": "Ninaada Foundation",
          "expected-registration": 100,
          "event-title": "Tree Plantation Drive",
@@ -59,7 +59,7 @@ event = {"cid": 2, "eid": "3",
 
 events.insert(event)
 
-event = {"cid": 2, "eid": "4",
+event = {"cid": "2", "eid": "4",
          "foundation-name": "Ninaada Foundation",
          "expected-registration": 100,
          "event-title": "Day of teaching",

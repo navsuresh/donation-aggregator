@@ -133,19 +133,19 @@
 							<div class="frame-button">
 								<i class="material-icons">add</i>
 							</div>
-							<iframe></iframe>
+							<iframe class="custom-widget" src=""></iframe>
 						</div>
 						<div class="frame-box" onclick="loadWidgetMenu(this)">
 							<div class="frame-button">
 								<i class="material-icons">add</i>
 							</div>
-							<iframe></iframe>
+							<iframe class="custom-widget" src=""></iframe>
 						</div>
 						<div class="frame-box" onclick="loadWidgetMenu(this)">
 							<div class="frame-button">
 								<i class="material-icons">add</i>
 							</div>
-							<iframe></iframe>
+							<iframe class="custom-widget" src=""></iframe>
 						</div>
 					</div>
 				</div>
@@ -282,6 +282,12 @@
 				$("#phone-no").val(data["phone-no"])
 				$("#contact-name").val(data["contact-name"])
 				colorReplace(currentColor,data["color"])
+
+				var wid = $(".custom-widget");
+				wid.each((ind, element)=>{
+					$(element).attr("src", data["widgets"][ind])
+				})
+
 				$("#color-select").val(data["color"])
 				$("body").css({"opacity":"1"})
 			}
@@ -374,7 +380,7 @@
             }
 
             function addWidget(path){
-                $($(selectedFrame).children()[1]).attr("src",path)
+                $($(selectedFrame).children()[1]).attr("src","http://localhost:5000/calendar")
                 $($(selectedFrame).children()[0]).hide()
             }
 
@@ -392,19 +398,19 @@
 											<div class="frame-button">
 												<i class="material-icons">add</i>
 											</div>
-											<iframe></iframe>
+											<iframe class="custom-widget" src=""></iframe>
 										</div>
 										<div class="frame-box" onclick="loadWidgetMenu(this)">
 											<div class="frame-button">
 												<i class="material-icons">add</i>
 											</div>
-											<iframe></iframe>
+											<iframe class="custom-widget" src=""></iframe>
 										</div>
 										<div class="frame-box" onclick="loadWidgetMenu(this)">
 											<div class="frame-button">
 												<i class="material-icons">add</i>
 											</div>
-											<iframe></iframe>
+											<iframe class="custom-widget" src=""></iframe>
 										</div>
 									</div>
 								</div>
@@ -536,6 +542,10 @@
 					"widgets":[],
 					"tags":[]
 				}
+				var wid = $(".custom-widget");
+				wid.each((ind, element)=>{
+					pageData["widgets"].push($(element).attr('src'))
+				})
 
 				var tags = $(".tag")
 
@@ -577,7 +587,6 @@
 					})
 				}
 
-					
 			}
 
             function toggleEditingMode(){

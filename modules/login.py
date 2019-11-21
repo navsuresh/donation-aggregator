@@ -67,7 +67,6 @@ class VerifyOTP(Resource):
 
 
 class UpdateCharityFollowCount(Resource):
-
     def post(self):
         jsonReq = request.get_json(force=True)
         print(jsonReq)
@@ -106,20 +105,18 @@ class ForgotPassword(Resource):
         email = requestData["email"]
         linkReset[url] = email
         msg = Message('Reset password', sender='charity.email.se@gmail.com', recipients=[email])
-        msg.body = "Click this URL to reset your password " + "http://localhost:4000/validatepassword/" + url
+        msg.body = "Click this URL to reset your password " + "http://localhost:5000/validatepassword/" + url
         mail.send(msg)
         return "Sent"
 
 
 class ValidateResetPassword(Resource):
-
     def get(self, url):
         if url in linkReset:
             return globals.app.send_static_file('reset.html')
 
 
 class SetNewPassword(Resource):
-
     def post(self):
         password = json.loads(request.get_data().decode("UTF-8"))["password"]
         url = json.loads(request.get_data().decode("UTF-8"))["url"]
@@ -130,7 +127,6 @@ class SetNewPassword(Resource):
 
 
 class CustomProfilePage(Resource):
-
     def get(self):
         return globals.app.send_static_file('customize.html')
 
@@ -139,8 +135,6 @@ class EventsPage(Resource):
 
     def get(self, eventid):
         return globals.app.send_static_file('events.html')
-
-
 
 
 api.add_resource(LoginPage, '/login')
