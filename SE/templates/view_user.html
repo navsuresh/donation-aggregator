@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--<link rel="stylesheet" type="text/css" href="test1.css">-->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<!--<script type="test1.js"></script>-->
+<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+
+
+<link rel="stylesheet" href="https://bootswatch.com/4/simplex/bootstrap.min.css"/>
+
+<style>
+.card-title{
+    font-size: 30px;
+    height:400px;
+
+}
+
+.row{
+   
+    width: 1800px;
+    margin:auto;
+
+}
+.card{
+    
+    width:1800px;
+    height:1200px;
+
+
+
+}
+
+body{
+    padding-top: 68px;
+    padding-bottom: 50px;
+    font-size: 30px;
+    
+}
+        .image-container {
+            position: relative;
+            height:300px;
+            width: 300px;
+        }
+
+        .image {
+            opacity: 1;
+            display: block;
+            width: 100%;
+            height:100%;
+            transition: .5s ease;
+            backface-visibility: hidden;
+        }
+
+        .middle {
+            transition: .5s ease;
+            opacity: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .image-container:hover .image {
+            opacity: 0.3;
+        }
+
+        .image-container:hover .middle {
+            opacity: 1;
+        }
+
+        
+</style>
+
+</head>
+<body>
+<script>
+$(document).ready(function () {
+            $imgSrc = $('#imgProfile').attr('src');
+            function readURL(input) {
+
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('#imgProfile').attr('src', e.target.result);
+                    };
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+            $('#btnChangePicture').on('click', function () {
+                // document.getElementById('profilePicture').click();
+                if (!$('#btnChangePicture').hasClass('changing')) {
+                    $('#profilePicture').click();
+                }
+                else {
+                    // change
+                }
+            });
+            $('#profilePicture').on('change', function () {
+                readURL(this);
+                $('#btnChangePicture').addClass('changing');
+                $('#btnChangePicture').attr('value', 'Confirm');
+                $('#btnDiscard').removeClass('d-none');
+                // $('#imgProfile').attr('src', '');
+            });
+            $('#btnDiscard').on('click', function () {
+                // if ($('#btnDiscard').hasClass('d-none')) {
+                $('#btnChangePicture').removeClass('changing');
+                $('#btnChangePicture').attr('value', 'Change');
+                $('#btnDiscard').addClass('d-none');
+                $('#imgProfile').attr('src', $imgSrc);
+                $('#profilePicture').val('');
+                console.log($imgSrc);
+                // }
+            });
+        });
+</script>
+<div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+
+                    <div class="card-body">
+                        <div class="card-title mb-4">
+                            <div class="d-flex justify-content-start">
+
+                                <div class="image-container">
+                                    <img src="http://placehold.it/150x150" id="imgProfile" style="width: 300px; height: 300px" class="img-thumbnail" />
+                                    <div class="middle">
+                                        <input type="button" class="btn btn-secondary" id="btnChangePicture" value="Change" />
+                                        <input type="file" style="display: none;" id="profilePicture" name="file" />
+                                    </div>
+                                </div>
+
+                                <div class="userData ml-3">
+                                    <h2 class="d-block" style="font-size: 3rem; font-weight: bold"><a href="javascript:void(0);"> {{name}}</a></h2>
+                                    
+                                </div>
+
+                                <div class="ml-auto">
+                                    <input type="button" class="btn btn-primary d-none" id="btnDiscard" value="Discard Changes" />
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="basicInfo-tab" data-toggle="tab" href="#basicInfo" role="tab" aria-controls="basicInfo" aria-selected="true">About</a>
+                                    </li>
+
+                                </ul>
+                                <div class="tab-content ml-1" id="myTabContent">
+                                    <div class="tab-pane fade show active" id="basicInfo" role="tabpanel" aria-labelledby="basicInfo-tab">
+                                        
+                                        {% for key, value in result.items() %}
+                                        <div class="row">
+                                            <div class="col-sm-3 col-md-2 col-5">
+                                                <label style="font-weight:bold;">{{ key }}</label>
+                                            </div>
+                                            <div class="col-md-8 col-6">
+                                                {{ value }} 
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        {% endfor %}
+
+                                    </div>
+
+                                    
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
