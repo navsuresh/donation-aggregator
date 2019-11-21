@@ -3,6 +3,7 @@ from modules.follow import api_bp as api_follow
 from modules.login import api_bp as api_login
 from modules.charity import api_bp as api_charity
 from modules.faq import api_bp as api_faq
+from modules.notification import api_bp as api_notifications
 
 from modules import globals
 from flask_cors import CORS
@@ -17,6 +18,7 @@ globals.app.register_blueprint(api_follow, url_prefix='')
 globals.app.register_blueprint(api_login, url_prefix='')
 globals.app.register_blueprint(api_charity, url_prefix='')
 globals.app.register_blueprint(api_faq, url_prefix='')
+globals.app.register_blueprint(api_notifications, url_prefix='')
 
 
 CORS(globals.app, resources={r"/*": {"origins": "*"}})

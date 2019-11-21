@@ -90,15 +90,20 @@ class Login(Resource):
         charityrow = globals.db.charity_details.find({"email": email}).limit(1)
         if userrow.count():
             if bcrypt.checkpw(password.encode("utf-8"), userrow[0]["password"]):
+                session["logged_in"] = True
+                session["uid"] = userrow[0]["uid"]
+                session["logged_in_as"] = "user"
                 return "Logged In-" + str(userrow[0]["uid"])
         elif charityrow.count():
             if bcrypt.checkpw(password.encode("utf-8"), charityrow[0]["password"]):
+                session["logged_in"] = True
+                session["cid"] = charityrow[0]["cid"]
+                session["logged_in_as"] = "charity"
                 return "Logged In-" + str(charityrow[0]["cid"])
         return "Wrong password"
 
 
 class ForgotPassword(Resource):
-
     def post(self):
         requestData = json.loads(request.get_data().decode("UTF-8"))
         url = re.sub('[^a-zA-Z]', '', str(bcrypt.hashpw(requestData["email"].encode("utf-8"), bcrypt.gensalt())))[:30:]

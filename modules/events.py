@@ -3,6 +3,7 @@ from uuid import uuid1
 from flask import request, jsonify, Response, session, Blueprint, render_template
 from flask_restful import Resource, Api
 from modules.search import Search
+from modules.notification import push_notification
 
 
 api_bp = Blueprint('api_events', __name__)
@@ -28,6 +29,8 @@ class CreateEvent(Resource):
         data["slots"] = ["_empty" for _ in range(slot_count)]  # Initialise placeholders for allowable widgets
         globals.db.events.insert(data)
         search_engine.update_index(data)
+        data["type"]="eventlistings"
+        push_notification(data, cid)
         response = jsonify({"eid": data["eid"]})
         response.status_code = 201
         return response
@@ -167,7 +170,6 @@ class GetWidget(Resource):
 class Calendar(Resource):
     def get(self):
         return globals.app.send_static_file('calendar.html')
-
 
 
 api.add_resource(UpdateWidget, '/<eid>/update-widget')

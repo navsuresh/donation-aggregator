@@ -100,7 +100,7 @@ class Search:
             if doc is None:
                 index_entry = {"term": word, "documents": [event["eid"]]}
                 globals.db.index_title.insert(index_entry)
-            else:
+            # else:
                 globals.db.index_title.update({"term": word}, {"$push": {"documents": event["eid"]}})
 
         for word in location:
