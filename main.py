@@ -25,7 +25,7 @@ globals.app.config['CORS_HEADERS'] = 'Content-Type'
 globals.app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 globals.app.config['MAIL_PORT'] = 465
 globals.app.config['MAIL_USERNAME'] = 'charity.email.se@gmail.com'
-globals.app.config['MAIL_PASSWORD'] = 'charitySE123'
+globals.app.config['MAIL_PASSWORD'] = 'updatedCharitySE123'
 globals.app.config['MAIL_USE_TLS'] = False
 globals.app.config['MAIL_USE_SSL'] = True
 
